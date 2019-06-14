@@ -15,8 +15,10 @@ import { StartComponent } from './start/start.component';
 import { RegComponent } from './reg/reg.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
-
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { environment } from '../environments/environment';
+import {MatNativeDateModule} from '@angular/material/core';
+
 
 @NgModule({
   declarations: [
@@ -35,9 +37,12 @@ import { environment } from '../environments/environment';
     MatDatepickerModule,
     MatButtonModule,
     FlexLayoutModule,
-
+    BrowserModule,
+    FormsModule,
+    ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule
+    AngularFirestoreModule,
+    MatNativeDateModule
   ],
   providers: [],
   bootstrap: [AppComponent]
