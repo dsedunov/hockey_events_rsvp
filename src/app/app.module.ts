@@ -45,14 +45,12 @@ import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     MatNativeDateModule,
-    NgxAuthFirebaseUIModule.forRoot({
-      apiKey: 'your-firebase-apiKey',
-      authDomain: 'your-firebase-authDomain',
-      databaseURL: 'your-firebase-databaseURL',
-      projectId: 'your-firebase-projectId',
-      storageBucket: 'your-firebase-storageBucket',
-      messagingSenderId: 'your-firebase-messagingSenderId'
-  }),
+    NgxAuthFirebaseUIModule.forRoot(environment.firebase,null,
+      {
+        enableFirestoreSync: true, // enable/disable autosync users with firestore
+        toastMessageOnAuthSuccess: true, // whether to open/show a snackbar message on auth success - default : true
+        toastMessageOnAuthError: true // whether to open/show a snackbar message on auth error - default : true
+      }),
   
   ],
   providers: [],

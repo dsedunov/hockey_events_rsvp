@@ -1,26 +1,31 @@
-<div fxLayout="column" fxLayoutAlign="space-around center">
-  <mat-card fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-    <img src="https://firebasestorage.googleapis.com/v0/b/dc-lepers-4edc7.appspot.com/o/1470760630-removebg-preview.png?alt=media&token=a7fdd83d-ea9d-4e90-b26d-547f6a0a7cc2" width="70" alt="">
-    <mat-card-content>
-        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-            <mat-form-field>
-                <input matInput type="email" placeholder="Email" [formControl]="emailFormControl"
-                       [errorStateMatcher]="matcher" required>
-                
-                <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
-                  дай почту
-                </mat-error>
-                <mat-error *ngIf="emailFormControl.hasError('required')">
-                  Email <strong>необходим</strong>
-                </mat-error>
-              </mat-form-field>
-          <mat-form-field>
-            <input matInput matInput type="password" placeholder="Password" required>
-          </mat-form-field>
-        
-        </div>
-      </mat-card-content>
-    <button mat-raised-button color="primary" routerLink="/reg">Войти</button>
+<div class="container">
+  <div fxLayout="column" fxLayout.xs="column" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
+      <img vspace="20" src="https://firebasestorage.googleapis.com/v0/b/dc-lepers-4edc7.appspot.com/o/1470760630-removebg-preview.png?alt=media&token=a7fdd83d-ea9d-4e90-b26d-547f6a0a7cc2" width="70" alt="">
+<mat-card fxFlexAlign.gt-xs="center">
+<ngx-auth-firebaseui
+[signInTabText]="'Вход'"
+[signInCardTitleText]="'Добро Пожаловать'"
+[loginButtonText]="'Войти'"
+[registerTabText]="'Регистрация'"
+[registerCardTitleText]="'Зарегистрируй себя'"
+[nameText]="'Nickname'"
+[nameErrorRequiredText]="'Обязательно!'"
+[nameErrorMinLengthText]="'Так нельзя'"
+[nameErrorMaxLengthText]="'Слишком длинное'"
+[emailText]="'Email'"
+[emailErrorRequiredText]="'Обязательно!'"
+[emailErrorPatternText]="'Это не может быть Email'"
+[passwordText]="'Password'"
+[passwordErrorRequiredText]="'Обязательно!'"
+[registerButtonText]="'Готово'"
 
-  </mat-card>
+
+appearance="outline" (onSuccess)="printUser($event)" (onError)="printError($event)"
+  [providers]="[]" [registrationEnabled]="true" messageOnAuthSuccess="теперь ты в даркенете"
+  messageOnAuthError="Церковь! Что-то пошло не так..." [tabindex]="0" [guestEnabled]="false" [resetPasswordEnabled]="false">
+</ngx-auth-firebaseui>
+</mat-card>
+  </div>
 </div>
+
+<!-- Добавить доп поля https://github.com/AnthonyNahas/ngx-auth-firebaseui/issues/208 ?? -->

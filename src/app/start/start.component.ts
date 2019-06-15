@@ -1,13 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
-
-export class MyErrorStateMatcher implements ErrorStateMatcher {
-  isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
-    const isSubmitted = form && form.submitted;
-    return !!(control && control.invalid && (control.dirty || control.touched || isSubmitted));
-  }
-}
+import {Component, OnInit} from '@angular/core';
 
 @Component({
   selector: 'app-start',
@@ -21,13 +12,12 @@ export class StartComponent implements OnInit {
   ngOnInit() {
   }
 
-}
+  printUser(event) {
+    console.log(event);
+  }
 
-export class InputErrorStateMatcherExample {
-  emailFormControl = new FormControl('', [
-    Validators.required,
-    Validators.email,
-  ]);
+  printError(event) {
+   console.error(event);
+  }
 
-  matcher = new MyErrorStateMatcher();
 }
