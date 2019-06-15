@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -18,6 +17,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { environment } from '../environments/environment';
 import {MatNativeDateModule} from '@angular/material/core';
+import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+
+
 
 
 @NgModule({
@@ -42,7 +44,16 @@ import {MatNativeDateModule} from '@angular/material/core';
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    NgxAuthFirebaseUIModule.forRoot({
+      apiKey: 'your-firebase-apiKey',
+      authDomain: 'your-firebase-authDomain',
+      databaseURL: 'your-firebase-databaseURL',
+      projectId: 'your-firebase-projectId',
+      storageBucket: 'your-firebase-storageBucket',
+      messagingSenderId: 'your-firebase-messagingSenderId'
+  }),
+  
   ],
   providers: [],
   bootstrap: [AppComponent]
