@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-reg',
@@ -7,16 +8,29 @@ import { AngularFirestore } from '@angular/fire/firestore';
   styleUrls: ['./reg.component.scss']
 })
 export class RegComponent implements OnInit {
+  constructor(
+    private db: AngularFirestore,
+    private formBuilder: FormBuilder
+  ) {
+  }
 
-  constructor(private db: AngularFirestore) { }
+  personForm = this.formBuilder.group({
+    name: [''],
+    email: [''],
+  });
 
   ngOnInit() {
   }
 
   save() {
-    this.db.collection('users').add(
-        { name: 'user' }
+    if (this.personForm.status === 'VALID') {
+      this.db.collection('users').add(
+        this.personForm.value
       );
+    } else {
+      console.log('invalid status');
+    }
+
   }
 
 }
