@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LoginComponent } from './login/login.component';
 import { MatCardModule } from '@angular/material/card';
+import {MatIconModule} from '@angular/material'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -45,6 +46,7 @@ import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     MatNativeDateModule,
+    MatIconModule,
     NgxAuthFirebaseUIModule.forRoot(environment.firebase,null,
       {
         enableFirestoreSync: true, // enable/disable autosync users with firestore

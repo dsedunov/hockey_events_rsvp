@@ -15,8 +15,17 @@ export class RegComponent implements OnInit {
   }
 
   personForm = this.formBuilder.group({
-    name: [''],
     email: [''],
+    password: [''],
+    nickName: [''],
+    name: [''],
+    surname: [''],
+    // isAdmin: [null],
+    // stick: [Array],
+    // active: [Boolean],
+    // access: [Boolean],
+    // role: [null]
+
   });
 
   ngOnInit() {
@@ -26,11 +35,12 @@ export class RegComponent implements OnInit {
     if (this.personForm.status === 'VALID') {
       this.db.collection('users').add(
         this.personForm.value
-      );
+      ).then;{alert('Успешно!');};
     } else {
       console.log('invalid status');
     }
 
   }
+
 
 }
