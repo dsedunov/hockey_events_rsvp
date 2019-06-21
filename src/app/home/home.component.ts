@@ -8,14 +8,16 @@ import { Component, OnInit } from '@angular/core';
 
 export class HomeComponent {
   toggle = true;
-  status = "Enable";
+  status = 'Enable';
 
   enableDisableRule(job) {
     this.toggle = !this.toggle;
-    this.status = this.toggle ? "Enable" : "Disable";
+    this.status = this.toggle ? 'Enable' : 'Disable';
   }
 
+  do() {
 
+  }
 
 
 }
