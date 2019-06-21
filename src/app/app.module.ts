@@ -12,7 +12,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { StartComponent } from './start/start.component';
-import { RegComponent } from './reg/reg.component';
+import { RegComponent } from './auth/reg.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -22,7 +22,7 @@ import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { HomeComponent } from './home/home.component';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatToolbarModule} from '@angular/material/toolbar';
-
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 
@@ -35,6 +35,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     HomeComponent
   ],
   imports: [
+    MatSnackBarModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -44,7 +45,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatDatepickerModule,
     MatButtonModule,
     FlexLayoutModule,
-    BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
@@ -59,7 +59,7 @@ import {MatToolbarModule} from '@angular/material/toolbar';
         toastMessageOnAuthSuccess: true, // whether to open/show a snackbar message on auth success - default : true
         toastMessageOnAuthError: true // whether to open/show a snackbar message on auth error - default : true
       }),
-  
+
   ],
   providers: [],
   bootstrap: [AppComponent]

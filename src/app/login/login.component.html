@@ -6,13 +6,13 @@
     <form>
       <mat-card-content fxLayout="column">
         <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-          <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px"> <mat-icon aria-hidden="false">email</mat-icon> 
+          <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px"> <mat-icon aria-hidden="false">email</mat-icon>
             <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
             <input type='email' matInput
                    required>
           </mat-form-field>
-        </div> 
+        </div>
         <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px"> <mat-icon aria-hidden="false">remove_red_eye</mat-icon>
             <mat-form-field appearance="outline">
                     <mat-label>Email</mat-label>
@@ -23,7 +23,7 @@
         </div>
          <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
           <button mat-raised-button color="primary">Войти</button>
-          <button [routerLink]="['/reg']" mat-button color="accent"> Регистрация</button>
+          <button [routerLink]="['/auth']" mat-button color="accent"> Регистрация</button>
          </div>
         </div>
       </mat-card-content>
