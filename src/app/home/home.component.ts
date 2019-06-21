@@ -5,11 +5,17 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
 
-  constructor() { }
+export class HomeComponent {
+  toggle = true;
+  status = "Enable";
 
-  ngOnInit() {
+  enableDisableRule(job) {
+    this.toggle = !this.toggle;
+    this.status = this.toggle ? "Enable" : "Disable";
   }
+
+
+
 
 }

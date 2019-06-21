@@ -21,6 +21,7 @@ import {MatNativeDateModule} from '@angular/material/core';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { HomeComponent } from './home/home.component';
 import {MatTabsModule} from '@angular/material/tabs';
+import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 
@@ -50,6 +51,7 @@ import {MatTabsModule} from '@angular/material/tabs';
     AngularFirestoreModule,
     MatNativeDateModule,
     MatTabsModule,
+    MatToolbarModule,
     MatIconModule,
     NgxAuthFirebaseUIModule.forRoot(environment.firebase,null,
       {
