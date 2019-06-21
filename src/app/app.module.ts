@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { LoginComponent } from './login/login.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -11,7 +10,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { StartComponent } from './start/start.component';
 import { RegComponent } from './auth/reg.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -24,15 +22,15 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthGuard } from './auth-guard.service';
+import { EventFormComponent } from './event-form/event-form.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    StartComponent,
     RegComponent,
-    HomeComponent
+    HomeComponent,
+    EventFormComponent
   ],
   imports: [
     MatSnackBarModule,
