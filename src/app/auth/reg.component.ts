@@ -80,6 +80,7 @@ export class RegComponent implements OnInit {
 
   login() {
     if (this.loginForm.status === 'VALID') {
+
       this.firebaseAuth
         .auth
         .signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
