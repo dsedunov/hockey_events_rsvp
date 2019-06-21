@@ -19,6 +19,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { environment } from '../environments/environment';
 import {MatNativeDateModule} from '@angular/material/core';
 import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
+import { HomeComponent } from './home/home.component';
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 
@@ -28,7 +30,8 @@ import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
     AppComponent,
     LoginComponent,
     StartComponent,
-    RegComponent
+    RegComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,7 @@ import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     MatNativeDateModule,
+    MatTabsModule,
     MatIconModule,
     NgxAuthFirebaseUIModule.forRoot(environment.firebase,null,
       {

@@ -1,4 +1,42 @@
 <div fxLayout="row" fxLayoutAlign="center center" class="reg-main">
+  <mat-tab-group>
+
+    <!-- Таб для входа -->
+      <mat-tab label="Вход">
+          <mat-card fxFlexAlign.gt-xs="center">
+              <mat-card-header>
+                <mat-card-title>Вход</mat-card-title>
+              </mat-card-header>
+              <form>
+                <mat-card-content fxLayout="column">
+                  <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+                    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px"> <mat-icon aria-hidden="false">email</mat-icon> 
+                      <mat-form-field appearance="outline">
+                              <mat-label>Email</mat-label>
+                      <input type='email' matInput
+                             required>
+                    </mat-form-field>
+                  </div> 
+                  <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px"> <mat-icon aria-hidden="false">remove_red_eye</mat-icon>
+                      <mat-form-field appearance="outline">
+                              <mat-label>Email</mat-label>
+                      <input type='password' matInput
+          
+                             required>
+                    </mat-form-field>
+                  </div>
+                   <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="10px">
+                    <button mat-raised-button color="primary">Войти</button>
+                    <button [routerLink]="['/reg']" mat-button color="accent"> Регистрация</button>
+                   </div>
+                  </div>
+                </mat-card-content>
+              </form>
+            </mat-card>
+
+        </mat-tab>
+<!-- Таб для регистрации -->
+    <mat-tab label="Регистрация">
   <mat-card>
   <mat-card-header>
     <mat-card-title>Регистрация</mat-card-title>
@@ -49,4 +87,6 @@
   </mat-card-actions> -->
 
 </mat-card>
+</mat-tab>
+</mat-tab-group>
 </div>
