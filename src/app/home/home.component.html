@@ -1,0 +1,82 @@
+<div class="mainDiv">
+  <mat-toolbar fxLayoutAlign="end center"><button mat-icon-button (click)="goToProfile()" >
+    <mat-icon>account_circle</mat-icon>
+  </button></mat-toolbar>
+<mat-tab-group >
+
+    <!-- Таб для текущих событий -->
+      <mat-tab label="Текущие">
+          <mat-card fxFlexAlign.gt-xs="center">
+              <mat-card-header>
+                  <div mat-card-avatar class="example-header-image"></div>
+                  <mat-card-title>Событие</mat-card-title>
+                  <button mat-icon-button [matMenuTriggerFor]="menu">
+                      <mat-icon>more_vert</mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button mat-menu-item>
+                          <mat-icon>content_copy</mat-icon>
+                          <span>Поделиться</span>
+                        </button>
+                        <button mat-menu-item>
+                          <mat-icon>notifications</mat-icon>
+                          <span>Отправить уведомление</span>
+                        </button>
+                        <button mat-menu-item disabled>
+                            <mat-icon>delete</mat-icon>
+                            <span>Удалить</span>
+                          </button>
+                      </mat-menu>
+                  <mat-card-subtitle>Где-то/что-то</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                  <p>
+                    Описание
+                  </p>
+                </mat-card-content>
+                <mat-card-content>
+                    <p>
+                      Counter - Будет 20 / не будет 10
+                    </p>
+                  </mat-card-content>
+                <mat-card-actions fxLayout="row" fxLayoutAlign="space-evenly center">
+                  <button (click)="enableDisableRule()"
+                  [ngClass]="{'green' : toggle, 'red': !toggle}" mat-button>Да</button>
+                  <button mat-button>Нет</button>
+                </mat-card-actions>
+          </mat-card>
+        </mat-tab>
+<!-- Таб для регистрации -->
+    <mat-tab label="Прошедшие">
+        <mat-card fxFlexAlign.gt-xs="center">
+        <mat-card-header>
+            <div mat-card-avatar ></div>
+            
+              <mat-card-title>Событие</mat-card-title>
+            
+            
+            <mat-card-subtitle>Где-то/что-то</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+          <mat-card-content>
+            <p>
+              Описание
+            </p>
+          </mat-card-content>
+          <mat-card-content>
+              <p>
+                Counter - Будет 20 / не будет 10
+              </p>
+            </mat-card-content>
+          <mat-card-actions fxLayout="row" fxLayoutAlign="space-evenly center">
+            <button mat-button>Да</button>
+            <button mat-button>Нет</button>
+          </mat-card-actions>
+        </mat-card>
+</mat-tab>
+</mat-tab-group>
+</div>
+<div fxLayoutGap="10px" fxLayoutAlign="end center">
+<button id="add-button" mat-fab color="primary" (click)="createEvent()"><mat-icon>add</mat-icon></button>
+</div>

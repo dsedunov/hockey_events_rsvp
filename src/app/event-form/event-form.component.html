@@ -1,0 +1,62 @@
+<div>
+    <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="200px"> 
+    <div>
+        <button mat-icon-button color="warn" (click)="backToHome()">
+            <mat-icon>close</mat-icon>
+          </button>
+    </div>
+     
+    </div>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>Создай</mat-card-title>
+        <!-- <mat-card-subtitle>---</mat-card-subtitle> -->
+      </mat-card-header>
+      <form [formGroup]="eventForm" >
+        <mat-card-content>
+          <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
+            <mat-form-field appearance="outline">
+              <mat-label>Где?</mat-label>
+              <input type='text'
+                     matInput
+                     formControlName="where"
+                     required
+                     >
+            </mat-form-field>
+            <mat-form-field>
+                <input matInput type="datetime-local" placeholder="start date" formControlName="gameDay" required>
+              </mat-form-field>
+              <!-- <mat-form-field>
+                  <mat-label>Для кого?</mat-label>
+              <input matInput type="text"  formControlName="vType">
+<mat-radio-group
+  [(ngModel)]="visibility">
+  <mat-radio-button  *ngFor="let season of seasons" [value]="vTypes">
+    {{vTypes}}
+  </mat-radio-button>
+</mat-radio-group>
+</mat-form-field> -->
+            <mat-form-field>
+                <mat-label>Тип</mat-label>
+                <input matInput type="text"  formControlName="gameType">
+                <mat-select name="gameType" [(value)]="gameTypeSelected">
+                  <mat-option *ngFor="let gameType of types" [value]="gameType.value">
+                    {{gameType.viewValue}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+              
+            <div fxLayout="row"
+                 fxLayoutAlign="space-evenly center"
+                 fxLayoutGap="10px">
+              <button mat-raised-button color="primary">Сохранить</button>
+            </div>
+          </div>
+        </mat-card-content>
+      </form>
+      <!-- <mat-card-actions>
+        <button mat-button>Ok</button>
+      </mat-card-actions> -->
+  
+    </mat-card>
+    </div>
