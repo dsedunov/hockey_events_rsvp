@@ -49,8 +49,8 @@ export class RegComponent implements OnInit {
     const userData = {
       ...this.registerForm.value,
       uid,
-      stick: [],
-      active: [],
+      stick: null,
+      active: false,
       role: null,
     };
 

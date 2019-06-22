@@ -23,6 +23,12 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthGuard } from './auth-guard.service';
 import { EventFormComponent } from './event-form/event-form.component';
+import { ProfileComponent } from './profile/profile.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatSelectModule} from '@angular/material/select';
+import {MatRadioModule} from '@angular/material/radio';
+
+
 
 
 @NgModule({
@@ -30,7 +36,8 @@ import { EventFormComponent } from './event-form/event-form.component';
     AppComponent,
     RegComponent,
     HomeComponent,
-    EventFormComponent
+    EventFormComponent,
+    ProfileComponent
   ],
   imports: [
     MatSnackBarModule,
@@ -39,6 +46,7 @@ import { EventFormComponent } from './event-form/event-form.component';
     BrowserAnimationsModule,
     MatCardModule,
     MatFormFieldModule,
+    MatRadioModule,
     MatInputModule,
     MatDatepickerModule,
     MatButtonModule,
@@ -49,7 +57,9 @@ import { EventFormComponent } from './event-form/event-form.component';
     AngularFirestoreModule,
     MatNativeDateModule,
     MatTabsModule,
+    MatMenuModule,
     MatToolbarModule,
+    MatSelectModule,
     MatIconModule,
     NgxAuthFirebaseUIModule.forRoot(environment.firebase, null,
       {

@@ -24,6 +24,11 @@ export class HomeComponent {
     this.router.navigateByUrl('/event');
 
   }
+  goToProfile() {
+    this.router.navigateByUrl('/profile');
+
+  }
+
 
 
 }
