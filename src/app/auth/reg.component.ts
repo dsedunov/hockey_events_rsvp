@@ -54,14 +54,14 @@ export class RegComponent implements OnInit {
       role: null,
     };
 
-    return this.afs.collection('users').doc(this.registerForm.value.email).set(userData);
+    return this.afs.collection('users').doc((this.registerForm.value.email.toLowerCase())).set(userData);
   }
 
   register() {
     if (this.registerForm.status === 'VALID') {
       this.firebaseAuth
         .auth
-        .createUserWithEmailAndPassword(this.registerForm.value.email, this.registerForm.value.password)
+        .createUserWithEmailAndPassword((this.registerForm.value.email).toLowerCase(), this.registerForm.value.password)
         .then(value => {
           console.log(value);
           this.createUser(value.user.uid)

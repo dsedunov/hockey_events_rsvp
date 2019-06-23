@@ -1,71 +1,65 @@
 <div>
-  <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="200px"> 
-  <div>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="200px">
+    <div>
       <button mat-icon-button color="warn" (click)="backToHome()">
-          <mat-icon>keyboard_backspace</mat-icon>
-        </button>
-  </div>
-     
-        
-        <button mat-raised-button color="warn" (click)="logout()">
-            <mat-icon>exit_to_app</mat-icon>
-            logout
-        </button>
-      
+        <mat-icon>keyboard_backspace</mat-icon>
+      </button>
+    </div>
+
+
+    <button mat-raised-button color="warn" (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+      logout
+    </button>
+
   </div>
   <mat-card>
     <mat-card-header>
       <mat-card-title>Привет @Nickname</mat-card-title>
       <!-- <mat-card-subtitle>---</mat-card-subtitle> -->
     </mat-card-header>
-    <form [formGroup]="profileUpdateForm" >
+    <form [formGroup]="profileUpdateForm">
       <mat-card-content>
         <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input type='email'
-                   matInput
-                   disabled
-                   >
+            <input type='email' formControlName="email"
+                   matInput>
           </mat-form-field>
-       
+
           <mat-form-field appearance="outline">
             <mat-label>Nickname</mat-label>
-            <input type='text'
-                   matInput
-                   disabled
-                   >
+            <input type='text' formControlName="nickName"
+                   matInput>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Имя</mat-label>
-            <input type='text'
-                   matInput
-                   disabled>
+            <input type='text' formControlName="name"
+                   matInput>
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Фамилия</mat-label>
-            <input type='text'
-                   matInput
-                   disabled>
+            <input type='text' formControlName="surname"
+                   matInput>
           </mat-form-field>
           <mat-form-field>
-              <mat-label>Хват</mat-label>
-              <input matInput type="text"  formControlName="stick">
-              <mat-select name="stick" [(value)]="stickSelected">
-                <mat-option *ngFor="let stick of sticks" [value]="stick.value">
-                  {{stick.viewValue}}
-                </mat-option>
-              </mat-select>
-            </mat-form-field>
-            <mat-form-field>
-                <mat-label>Позиция</mat-label>
-                <input matInput type="text" formControlName="role">
-                <mat-select name="gameRole" [(value)]="roleSelected">
-                  <mat-option *ngFor="let gameRole of roles" [value]="gameRole.value">
-                    {{gameRole.viewValue}}
-                  </mat-option>
-                </mat-select>
-              </mat-form-field>
+            <mat-label>Хват</mat-label>
+            <input matInput type="text" formControlName="Stick">
+            <mat-select name="Stick" [(value)]="stickSelected">
+              <mat-option *ngFor="let Stick of sticks" [value]="Stick.value">
+                {{Stick.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-label>Позиция</mat-label>
+            <input matInput type="text" formControlName="role">
+            <mat-select name="gameRole" [(value)]="roleSelected">
+              <mat-option *ngFor="let GameRole of roles" [value]="GameRole.value">
+                {{GameRole.viewValue}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
           <div fxLayout="row"
                fxLayoutAlign="space-evenly center"
                fxLayoutGap="10px">
@@ -79,4 +73,4 @@
     </mat-card-actions> -->
 
   </mat-card>
-  </div>
+</div>
