@@ -62,8 +62,8 @@ export class EventFormComponent implements OnInit {
   createEvent() {
     if (this.eventForm.status === 'VALID') {
       console.log(this.eventForm.value);
-      const eventInfo = this.eventForm.value;
-
+      const eventInfo = { ...this.eventForm.value };
+      eventInfo.gameDay = +new Date(eventInfo.gameDay);
       return this.afs.collection('events').doc(this.eventForm.value.gameDay).set(eventInfo);
     }
   }
