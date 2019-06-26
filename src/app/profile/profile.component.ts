@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
   ];
 
   constructor(
-    private fs: AngularFirestore,
+    private afs: AngularFirestore,
     private router: Router,
     private profileUpdateFormBuilder: FormBuilder,
     private firebaseAuth: AngularFireAuth,
@@ -45,26 +45,33 @@ export class ProfileComponent implements OnInit {
   ) {
   }
 
-  a = null;
+  email = null;
+
   profileUpdateForm = this.profileUpdateFormBuilder.group({
-    email: [this.a],
+    email: [''],
     nickName: [''],
     name: [''],
     surname: [''],
-    Stick: [''],
+    stick: [''],
     role: ['']
   });
 
   ngOnInit() {
-    console.log(this.firebaseAuth.auth.currentUser.email);
-    // TODO доделать вывод данных в форму пользователя
-    const cityRef = this.fs.collection('users').doc((this.firebaseAuth.auth.currentUser.email).toLowerCase()).ref;
-    const getDoc = cityRef.get()
+    const usersRef = this.afs.collection('users').doc((this.firebaseAuth.auth.currentUser.email).toLowerCase()).ref;
+    usersRef.get()
       .then(doc => {
         console.log(doc);
         if (doc.exists) {
-          this.a = doc.data().email;
-          console.log('Document data:', doc.data());
+          const { email, nickName, name, surname, stick, role } = doc.data();
+          this.email = email;
+          this.profileUpdateForm.setValue({
+            email,
+            nickName,
+            name,
+            surname,
+            stick,
+            role,
+          });
         } else {
           console.log('No such document!');
         }
@@ -96,4 +103,18 @@ export class ProfileComponent implements OnInit {
 
   // Метод для апдейта базы
 
+  saveProphile() {
+    if (this.profileUpdateForm.status === 'VALID') {
+      const newUserData = this.profileUpdateForm.value;
+      this.afs.collection('users').doc((this.email.toLowerCase())).set(newUserData)
+        .then(() => {
+          this.snackBar.open('Данные успешно изменены', 'ok', {
+            duration: 10000,
+          });
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
 }
