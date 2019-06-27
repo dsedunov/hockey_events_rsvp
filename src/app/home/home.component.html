@@ -39,14 +39,20 @@
         </mat-card-content>
         <mat-card-content>
           <p>
-            Counter - Будет {{event.players}} / не будет 10
+            Будет {{ event.players.accept.length }} / не будет {{ event.players.reject.length }}
           </p>
         </mat-card-content>
         <mat-card-actions fxLayout="row" fxLayoutAlign="space-evenly center">
-          <button (click)="enableDisableRule()"
-                  [ngClass]="{'green' : toggle, 'red': !toggle}" mat-button>Да
+          <button [disabled]="event.whatIAmAnswer"
+                  (click)="accessInvite(event.id, event.players,'accept')"
+                  [ngClass]="{'green' : event.whatIAmAnswer==='accept'}" mat-button>
+            Да
           </button>
-          <button mat-button>Нет</button>
+          <button mat-button [disabled]="event.whatIAmAnswer"
+                  (click)="accessInvite(event.id, event.players,'reject')"
+                  [ngClass]="{'red' : event.whatIAmAnswer==='reject'}">
+            Нет
+          </button>
         </mat-card-actions>
       </mat-card>
     </mat-tab>
