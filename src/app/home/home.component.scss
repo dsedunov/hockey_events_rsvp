@@ -1,19 +1,29 @@
 .green {
-    background-color: green;
-  }
-  
-  .red {
-    background-color: red;
-  }
-  .mainDiv{
-    position: relative;
-  }
-  #add-button{
-  
-    right: 20px;
-    bottom: 10px;
-    left: auto;
-    position: absolute;
-  }
+  background-color: green;
+}
 
-  
+.red {
+  background-color: red;
+}
+
+.mainDiv {
+  position: relative;
+}
+
+#add-button {
+  right: 20px;
+  bottom: 10px;
+  left: auto;
+  position: absolute;
+}
+
+mat-card {
+  margin-bottom: 1rem;
+}
+
+.add-button {
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
