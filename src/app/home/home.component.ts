@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   toggle = true;
   status = 'Enable';
   events: Array<any>;
-  eventsCollection: AngularFirestoreCollection<Location>;
+  eventsCollection: AngularFirestoreCollection<any>;
 
   constructor(
     private afs: AngularFirestore,
@@ -21,17 +21,17 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
-    // // this.eventsCollection = this.afs.collection('events', ref => ref.where('gameDay', '==', 'Для всех').orderBy('gameDay'));
-    // this.eventsCollection = this.afs.collection('events', ref => ref.limit(10).orderBy('gameDay', 'desc'));
-    // this.eventsCollection.snapshotChanges().subscribe(eventsList => {
-    //   this.events = eventsList.map(item => {
-    //     return {
-    //       ...item.payload.doc.data(),
-    //       gameDay: new Date(item.payload.doc.data().gameDay).toLocaleDateString("en-US"),
-    //       participant: item.payload.doc.data().participant && item.payload.doc.data().participant.length || 0,
-    //     };
-    //   });
-    // });
+    // this.eventsCollection = this.afs.collection('events', ref => ref.where('gameDay', '==', 'Для всех').orderBy('gameDay'));
+    this.eventsCollection = this.afs.collection('events', ref => ref.limit(10).orderBy('gameDay', 'desc'));
+    this.eventsCollection.snapshotChanges().subscribe(eventsList => {
+      this.events = eventsList.map(item => {
+        return {
+          ...item.payload.doc.data(),
+          gameDay: new Date(item.payload.doc.data().gameDay).toLocaleDateString('en-US'),
+          players: item.payload.doc.data().players && item.payload.doc.data().players.length || 0,
+        };
+      });
+    });
   }
 
   enableDisableRule(job) {
