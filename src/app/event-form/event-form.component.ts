@@ -64,7 +64,14 @@ export class EventFormComponent implements OnInit {
       console.log(this.eventForm.value);
       const eventInfo = { ...this.eventForm.value };
       eventInfo.gameDay = +new Date(eventInfo.gameDay);
-      return this.afs.collection('events').doc(this.eventForm.value.gameDay).set(eventInfo);
+      return this.afs.collection('events').doc(this.eventForm.value.gameDay).set(eventInfo).then(() => {
+        this.snackBar.open('Молодец', 'ok', {
+          duration: 10000,
+        });
+        this.router.navigate(['/home']);
+      }).catch(err => {
+        console.log(err);
+      });
     }
   }
 
