@@ -25,9 +25,9 @@ export class HomeComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  async ngOnInit() {
     const usersRef = this.afs.collection('users').doc((this.firebaseAuth.auth.currentUser.email).toLowerCase()).ref;
-    usersRef.get()
+    await usersRef.get()
       .then(doc => {
         if (doc.exists) {
           this.user = doc.data();
