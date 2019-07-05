@@ -8,7 +8,7 @@
 
     <!-- Таб для текущих событий -->
     <mat-tab label="Текущие">
-      <mat-card *ngFor="let event of events" fxFlexAlign.gt-xs="center">
+      <mat-card (click)="viewDetails()" *ngFor="let event of events" fxFlexAlign.gt-xs="center">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
           <mat-card-title>Событие</mat-card-title>

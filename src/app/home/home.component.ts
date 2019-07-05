@@ -93,4 +93,8 @@ export class HomeComponent implements OnInit {
   goToProfile() {
     this.router.navigateByUrl('/profile');
   }
+
+  viewDetails() {
+    this.router.navigateByUrl('/view');
+  }
 }
