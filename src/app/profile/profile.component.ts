@@ -46,6 +46,7 @@ export class ProfileComponent implements OnInit {
   }
 
   email = null;
+  nickName = null;
 
   profileUpdateForm = this.profileUpdateFormBuilder.group({
     email: [''],
@@ -64,6 +65,7 @@ export class ProfileComponent implements OnInit {
         if (doc.exists) {
           const { email, nickName, name, surname, stick, role } = doc.data();
           this.email = email;
+          this.nickName = nickName;
           this.profileUpdateForm.setValue({
             email,
             nickName,

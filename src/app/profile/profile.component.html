@@ -15,7 +15,7 @@
   </div>
   <mat-card>
     <mat-card-header>
-      <mat-card-title>Привет @Nickname</mat-card-title>
+      <mat-card-title>Привет {{nickName}}</mat-card-title>
       <!-- <mat-card-subtitle>---</mat-card-subtitle> -->
     </mat-card-header>
     <form (ngSubmit)="saveProphile()" [formGroup]="profileUpdateForm">
@@ -26,7 +26,6 @@
             <input type='email' formControlName="email"
                    matInput>
           </mat-form-field>
-
           <mat-form-field appearance="outline">
             <mat-label>Nickname</mat-label>
             <input type='text' formControlName="nickName"

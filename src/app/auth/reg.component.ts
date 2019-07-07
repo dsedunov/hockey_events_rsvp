@@ -84,9 +84,27 @@ export class RegComponent implements OnInit {
         .auth
         .signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
         .then(res => {
-          console.log(res);
-          this.openSnackBar('Успех');
-          this.router.navigateByUrl('/home');
+          const usersRef = this.afs.collection('users').doc((this.loginForm.value.email.toLowerCase())).ref;
+          usersRef.get()
+            .then(doc => {
+              console.log(res);
+              this.openSnackBar('Успех');
+              this.router.navigateByUrl('/home');
+            })
+            .catch(err => {
+              console.log(err);
+              this.firebaseAuth
+                .auth
+                .signOut()
+                .then(response => {
+                  console.log(response);
+                  this.openSnackBar('Ваш аккаунт находится на валидации.');
+                })
+                .catch(error => {
+                  console.log(error);
+                  this.openSnackBar('Лшибка сервера.');
+                });
+            });
         })
         .catch(err => {
           this.openSnackBar(err.message);

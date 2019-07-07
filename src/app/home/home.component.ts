@@ -13,7 +13,8 @@ import { MatSnackBar } from '@angular/material';
 export class HomeComponent implements OnInit {
   toggle = true;
   status = 'Enable';
-  events: Array<any>;
+  eventsFuture: Array<any>;
+  eventsPast: Array<any>;
   eventsCollection: AngularFirestoreCollection<any>;
   user = null;
 
@@ -42,7 +43,7 @@ export class HomeComponent implements OnInit {
     // this.eventsCollection = this.afs.collection('events', ref => ref.where('gameDay', '==', 'Для всех').orderBy('gameDay'));
     this.eventsCollection = this.afs.collection('events', ref => ref.limit(10).orderBy('gameDay', 'desc'));
     this.eventsCollection.snapshotChanges().subscribe(eventsList => {
-      this.events = eventsList.map(item => {
+      const events = eventsList.map(item => {
         let whatIAmAnswer = false;
         const players = item.payload.doc.data().players && item.payload.doc.data().players.reduce((ARplayers, player) => {
           if (player.uid === this.user.uid) {
@@ -51,27 +52,39 @@ export class HomeComponent implements OnInit {
           ARplayers[player.status].push(player);
           return ARplayers;
         }, { accept: [], reject: [] }) || { accept: [], reject: [] };
+        const { gameDay } = item.payload.doc.data();
         return {
           id: item.payload.doc.id,
           ...item.payload.doc.data(),
-          gameDay: new Date(item.payload.doc.data().gameDay).toLocaleDateString('en-US'),
+          gameDayISO: gameDay,
+          gameDay: new Date(gameDay).toLocaleDateString('en-US'),
           players,
           whatIAmAnswer,
         };
       });
+      this.eventsFuture = events.filter(event => event.gameDayISO > +new Date());
+      this.eventsPast = events.filter(event => event.gameDayISO < +new Date());
+
     });
   }
 
   accessInvite(eventId, players, status) {
     const { name, surname, role } = this.user;
+
+    const oldPlayers = [...players.accept, ...players.reject];
+    const currUserUid = this.user.uid;
+    const oldRecordId = oldPlayers.findIndex(player => player.uid === currUserUid);
+    oldPlayers.splice(oldRecordId, oldRecordId);
+    players = [...oldPlayers, {
+      status,
+      name,
+      surname,
+      role,
+      uid: this.user.uid,
+    }];
+
     this.afs.collection('events').doc(eventId).update({
-      players: [...players.accept, ...players.reject, {
-        status,
-        name,
-        surname,
-        role,
-        uid: this.user.uid,
-      }]
+      players
     })
       .then(res => {
         this.snackBar.open(status === 'accept' ? 'Ждём тебя' : 'У тебя есть время передумать', 'ok', {
