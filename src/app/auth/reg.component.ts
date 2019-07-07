@@ -54,14 +54,14 @@ export class RegComponent implements OnInit {
       role: null,
     };
 
-    return this.afs.collection('users').doc(this.registerForm.value.email).set(userData);
+    return this.afs.collection('users').doc((this.registerForm.value.email.toLowerCase())).set(userData);
   }
 
   register() {
     if (this.registerForm.status === 'VALID') {
       this.firebaseAuth
         .auth
-        .createUserWithEmailAndPassword(this.registerForm.value.email, this.registerForm.value.password)
+        .createUserWithEmailAndPassword((this.registerForm.value.email).toLowerCase(), this.registerForm.value.password)
         .then(value => {
           console.log(value);
           this.createUser(value.user.uid)
@@ -80,14 +80,31 @@ export class RegComponent implements OnInit {
 
   login() {
     if (this.loginForm.status === 'VALID') {
-
       this.firebaseAuth
         .auth
         .signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
         .then(res => {
-          console.log(res);
-          this.openSnackBar('Успех');
-          this.router.navigateByUrl('/home');
+          const usersRef = this.afs.collection('users').doc((this.loginForm.value.email.toLowerCase())).ref;
+          usersRef.get()
+            .then(doc => {
+              console.log(res);
+              this.openSnackBar('Успех');
+              this.router.navigateByUrl('/home');
+            })
+            .catch(err => {
+              console.log(err);
+              this.firebaseAuth
+                .auth
+                .signOut()
+                .then(response => {
+                  console.log(response);
+                  this.openSnackBar('Ваш аккаунт находится на валидации.');
+                })
+                .catch(error => {
+                  console.log(error);
+                  this.openSnackBar('Лшибка сервера.');
+                });
+            });
         })
         .catch(err => {
           this.openSnackBar(err.message);

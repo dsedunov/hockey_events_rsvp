@@ -5,7 +5,7 @@ import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
-export interface gameType {
+export interface GameType {
   value: string;
   viewValue: string;
 }
@@ -20,9 +20,9 @@ export class EventFormComponent implements OnInit {
   gameTypeSelected = '';
 
 
-  types: gameType[] = [
-    {value: 'practice-0', viewValue: 'Тренировка'},
-    {value: 'game-1', viewValue: 'Игра'}
+  types: GameType[] = [
+    { value: 'Тренировка', viewValue: 'Тренировка' },
+    { value: 'Игра', viewValue: 'Игра' }
   ];
 
   visibility: string;
@@ -30,22 +30,24 @@ export class EventFormComponent implements OnInit {
 
 
   constructor(
+    private afs: AngularFirestore,
     private router: Router,
     private eventFormBuilder: FormBuilder,
     private firebaseAuth: AngularFireAuth,
     private snackBar: MatSnackBar,
-    ) { }
-    
-    eventForm = this.eventFormBuilder.group({
-      where: [''],
-      gameDay: [''],
-      vType:[''],
-      gameType: ['']
-    });
+  ) {
+  }
+
+  eventForm = this.eventFormBuilder.group({
+    where: [''],
+    gameDay: [''],
+    vType: [''],
+    gameType: ['']
+  });
 
   ngOnInit() {
   }
-  
+
 
   openSnackBar(message: string) {
     this.snackBar.open(message, 'ok', {
@@ -57,5 +59,20 @@ export class EventFormComponent implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
+  createEvent() {
+    if (this.eventForm.status === 'VALID') {
+      console.log(this.eventForm.value);
+      const eventInfo = { ...this.eventForm.value };
+      eventInfo.gameDay = +new Date(eventInfo.gameDay);
+      return this.afs.collection('events').doc(this.eventForm.value.gameDay).set(eventInfo).then(() => {
+        this.snackBar.open('Молодец', 'ok', {
+          duration: 10000,
+        });
+        this.router.navigate(['/home']);
+      }).catch(err => {
+        console.log(err);
+      });
+    }
+  }
 
 }

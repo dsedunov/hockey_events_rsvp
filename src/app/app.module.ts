@@ -27,6 +27,7 @@ import { ProfileComponent } from './profile/profile.component';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
+import { EventsViewComponent } from './events-view/events-view.component';
 
 
 
@@ -37,7 +38,8 @@ import {MatRadioModule} from '@angular/material/radio';
     RegComponent,
     HomeComponent,
     EventFormComponent,
-    ProfileComponent
+    ProfileComponent,
+    EventsViewComponent
   ],
   imports: [
     MatSnackBarModule,
