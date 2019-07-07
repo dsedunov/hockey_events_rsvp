@@ -19,7 +19,7 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button mat-menu-item>
+            <button  mat-menu-item (click)="copyMessage(event.players.accept)" value="click to copy" >
               <mat-icon>content_copy</mat-icon>
               <span>Поделиться</span>
             </button>

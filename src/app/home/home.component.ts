@@ -110,4 +110,22 @@ export class HomeComponent implements OnInit {
   viewDetails() {
     this.router.navigateByUrl('/view');
   }
+
+  copyMessage(playersObj: Array<any>) {
+    const playersString: string = playersObj
+      .reduce((startStr, player, i) => {
+        return `${ startStr }${ i ? '\n' : '' }${ player.name } ${ player.surname }`;
+      }, '');
+    const selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = playersString;
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+  }
 }
