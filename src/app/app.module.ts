@@ -28,6 +28,7 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import { EventsViewComponent } from './events-view/events-view.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 
@@ -69,6 +70,7 @@ import { EventsViewComponent } from './events-view/events-view.component';
         toastMessageOnAuthSuccess: true, // whether to open/show a snackbar message on auth success - default : true
         toastMessageOnAuthError: true // whether to open/show a snackbar message on auth error - default : true
       }),
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
   ],
   providers: [AuthGuard],

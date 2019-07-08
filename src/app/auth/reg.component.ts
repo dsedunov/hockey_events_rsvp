@@ -67,6 +67,7 @@ export class RegComponent implements OnInit {
           this.createUser(value.user.uid)
             .then(res => {
               this.openSnackBar('Успех');
+              this.router.navigate(['']);
               console.log(res);
             });
         })
