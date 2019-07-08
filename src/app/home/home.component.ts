@@ -74,6 +74,8 @@ export class HomeComponent implements OnInit {
 
     const oldPlayers = [...players.accept, ...players.reject];
     const currUserUid = this.user.uid;
+    const color = '';
+    const matchUp = '';
     const oldRecordId = oldPlayers.findIndex(player => player.uid === currUserUid);
     oldPlayers.splice(oldRecordId, oldRecordId);
     players = [...oldPlayers, {
@@ -82,6 +84,8 @@ export class HomeComponent implements OnInit {
       surname,
       role,
       uid: this.user.uid,
+      color,
+      matchUp
     }];
 
     this.afs.collection('events').doc(eventId).update({

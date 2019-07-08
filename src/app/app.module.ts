@@ -16,7 +16,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { MatNativeDateModule } from '@angular/material/core';
-import { NgxAuthFirebaseUIModule } from 'ngx-auth-firebaseui';
 import { HomeComponent } from './home/home.component';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -75,12 +74,6 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     MatToolbarModule,
     MatSelectModule,
     MatIconModule,
-    NgxAuthFirebaseUIModule.forRoot(environment.firebase, null,
-      {
-        enableFirestoreSync: true, // enable/disable autosync users with firestore
-        toastMessageOnAuthSuccess: true, // whether to open/show a snackbar message on auth success - default : true
-        toastMessageOnAuthError: true // whether to open/show a snackbar message on auth error - default : true
-      }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
   ],
