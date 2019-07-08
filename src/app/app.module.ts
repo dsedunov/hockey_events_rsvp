@@ -29,6 +29,13 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatRadioModule} from '@angular/material/radio';
 import { EventsViewComponent } from './events-view/events-view.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { MessagingService } from './messaging.service';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+// import { AsyncPipe } from '../../node_modules/@angular/common';
+
+
 
 
 
@@ -44,6 +51,10 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   ],
   imports: [
     MatSnackBarModule,
+    AngularFireDatabaseModule,
+    // AsyncPipe,
+    AngularFireAuthModule,
+    AngularFireMessagingModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -73,7 +84,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, MessagingService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
