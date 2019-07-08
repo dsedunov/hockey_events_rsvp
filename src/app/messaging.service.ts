@@ -34,8 +34,8 @@ export class MessagingService {
     this.angularFireAuth.authState.pipe(take(1)).subscribe(
       () => {
         const data = {};
-        data[userId] = token
-        this.angularFireDB.object('fcmTokens/').update(data)
+        data[userId] = token;
+        this.angularFireDB.object('fcmTokens/').update(data);
       });
   }
 
@@ -62,7 +62,7 @@ export class MessagingService {
   receiveMessage() {
     this.angularFireMessaging.messages.subscribe(
       (payload) => {
-        console.log("new message received. ", payload);
+        console.log('new message received.', payload);
         this.currentMessage.next(payload);
       });
   }
