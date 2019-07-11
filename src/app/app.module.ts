@@ -7,6 +7,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatDividerModule} from '@angular/material/divider'
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -18,6 +19,7 @@ import { environment } from '../environments/environment';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import {MatListModule} from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthGuard } from './auth-guard.service';
@@ -54,7 +56,9 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     // AsyncPipe,
     AngularFireAuthModule,
     AngularFireMessagingModule,
+    MatListModule,
     BrowserModule,
+    MatDividerModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatCardModule,

@@ -8,8 +8,8 @@
 
   </div>
   <mat-card>
-    <mat-card-header>
-      <mat-card-title>Создай меня</mat-card-title>
+    <mat-card-header fxLayoutAlign="center center">
+      <mat-card-title >Создай меня</mat-card-title>
       <!-- <mat-card-subtitle>---</mat-card-subtitle> -->
     </mat-card-header>
     <form [formGroup]="eventForm" (ngSubmit)="createEvent()">
@@ -29,7 +29,7 @@
                    required>
           </mat-form-field>
           <mat-label>Для кого?</mat-label>
-          <mat-radio-group formControlName="vType" [(ngModel)]="visibility">
+          <mat-radio-group fxLayoutAlign="space-evenly center" fxLayoutGap="28px" formControlName="vType" [(ngModel)]="visibility">
             <mat-radio-button *ngFor="let season of vTypes" [value]="season">
               {{season}}
             </mat-radio-button>

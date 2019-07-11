@@ -2,6 +2,11 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-html { background-color:#121212; } 
+html { background-color:#121212; }
 
 @import "~@angular/material/prebuilt-themes/purple-green.css";
+
+$mdc-theme-primary: #1565c0; // primary color
+$mdc-theme-secondary: #388e3c; // secondary color
+
+@import "~@angular-mdc/theme/material";
