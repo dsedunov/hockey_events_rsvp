@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material';
+import { PushNotificationOptions, PushNotificationService } from 'ngx-push-notifications';
 
 
 @Component({
@@ -24,10 +25,13 @@ export class HomeComponent implements OnInit {
     private afs: AngularFirestore,
     private router: Router,
     private snackBar: MatSnackBar,
+    private _pushNotificationService: PushNotificationService,
   ) {
   }
 
   async ngOnInit() {
+    const isGranted = this._pushNotificationService.isPermissionGranted;
+    this._pushNotificationService.requestPermission();
     const usersRef = this.afs.collection('users').doc((this.firebaseAuth.auth.currentUser.email).toLowerCase()).ref;
     await usersRef.get()
       .then(doc => {
@@ -133,4 +137,30 @@ export class HomeComponent implements OnInit {
     document.execCommand('copy');
     document.body.removeChild(selBox);
   }
+
+  myFunction() {
+    const title = 'Hello';
+    const options = new PushNotificationOptions();
+    options.body = 'Native Push Notification';
+
+    this._pushNotificationService.create(title, options).subscribe((notif) => {
+      if (notif.event.type === 'show') {
+        console.log('onshow');
+        setTimeout(() => {
+          notif.notification.close();
+        }, 3000);
+      }
+      if (notif.event.type === 'click') {
+        console.log('click');
+        notif.notification.close();
+      }
+      if (notif.event.type === 'close') {
+        console.log('close');
+      }
+    },
+    (err) => {
+         console.log(err);
+    });
+}
+
 }

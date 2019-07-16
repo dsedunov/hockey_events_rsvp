@@ -34,6 +34,7 @@ import { AngularFireMessagingModule } from '@angular/fire/messaging';
 import { MessagingService } from './messaging.service';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { PushNotificationService } from 'ngx-push-notifications';
 // import { AsyncPipe } from '../../node_modules/@angular/common';
 
 
@@ -81,7 +82,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
 
   ],
-  providers: [AuthGuard, MessagingService],
+  providers: [AuthGuard, MessagingService, PushNotificationService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
