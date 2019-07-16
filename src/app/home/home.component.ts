@@ -12,6 +12,8 @@ import { PushNotificationOptions, PushNotificationService } from 'ngx-push-notif
   styleUrls: ['./home.component.scss']
 })
 
+
+
 export class HomeComponent implements OnInit {
   toggle = true;
   status = 'Enable';
@@ -138,17 +140,21 @@ export class HomeComponent implements OnInit {
     document.body.removeChild(selBox);
   }
 
-  myFunction() {
-    const title = 'Hello';
+  notifyOnEvent() {
+    const title = 'Привет $юзер у тебя скоро хоккей';
     const options = new PushNotificationOptions();
-    options.body = 'Native Push Notification';
+    options.silent = false,
+    options.sticky = true,
+    options.lang = 'Russian',
+    options.body = '$type $date придешь?',
+    options.icon = 'assets/icons/apple-icon-114x114.png';
+    // options.actions = [{ action: 'yes', title: 'Yes', icon: 'images/yes.png' },
+    // { action: 'no', title: 'No', icon: 'images/no.png' }];
 
     this._pushNotificationService.create(title, options).subscribe((notif) => {
       if (notif.event.type === 'show') {
         console.log('onshow');
-        setTimeout(() => {
-          notif.notification.close();
-        }, 3000);
+
       }
       if (notif.event.type === 'click') {
         console.log('click');
