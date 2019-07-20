@@ -11,7 +11,7 @@
       <mat-card *ngFor="let event of eventsFuture" fxFlexAlign.gt-xs="center">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <div (click)="user && user.admin? viewDetails(): null" >
+          <div (click)="user && user.admin? viewDetails(): null">
             <mat-card-title>{{event.gameType}}</mat-card-title>
             <mat-card-subtitle>{{event.where}}</mat-card-subtitle>
           </div>
@@ -19,7 +19,7 @@
             <mat-icon>more_vert</mat-icon>
           </button>
           <mat-menu #menu="matMenu">
-            <button  mat-menu-item (click)="copyMessage(event.players.accept)" value="click to copy" >
+            <button mat-menu-item (click)="copyMessage(event.players.accept)" value="click to copy">
               <mat-icon>content_copy</mat-icon>
               <span>Копировать составы</span>
             </button>
@@ -27,7 +27,7 @@
               <mat-icon>notifications</mat-icon>
               <span>Отправить уведомление</span>
             </button>
-            <button mat-menu-item disabled>
+            <button mat-menu-item (click)="removeEvent(event.id)">
               <mat-icon>delete</mat-icon>
               <span>Удалить</span>
             </button>
@@ -64,7 +64,7 @@
       <mat-card *ngFor="let event of eventsPast" fxFlexAlign.gt-xs="center">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <div (click)="user && user.admin? viewDetails(): null" >
+          <div (click)="user && user.admin? viewDetails(): null">
             <mat-card-title>{{event.gameType}}</mat-card-title>
             <mat-card-subtitle>{{event.where}}</mat-card-subtitle>
           </div>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material';
+
 // import { PushNotificationOptions, PushNotificationService } from 'ngx-push-notifications';
 
 
@@ -11,7 +12,6 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-
 
 
 export class HomeComponent implements OnInit {
@@ -138,6 +138,20 @@ export class HomeComponent implements OnInit {
     selBox.select();
     document.execCommand('copy');
     document.body.removeChild(selBox);
+    this.snackBar.open('Скопировано', 'ok', {
+      duration: 10000,
+    });
+  }
+
+  removeEvent(id: string) {
+    return this.afs.collection('events').doc(id).delete()
+      .then(() => {
+        this.snackBar.open('Прощай', 'ok', {
+          duration: 10000,
+        });
+      }).catch(err => {
+        console.log(err);
+      });
   }
 
 //
