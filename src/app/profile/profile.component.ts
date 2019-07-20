@@ -31,9 +31,9 @@ export class ProfileComponent implements OnInit {
   ];
 
   roles: GameRole[] = [
-    { value: 'goalie-0', viewValue: 'Вратарь' },
-    { value: 'defensemen-1', viewValue: 'Защитник' },
-    { value: 'forward-2', viewValue: 'Нападающий' }
+    { value: 'Вратарь', viewValue: 'Вратарь' },
+    { value: 'Защитник', viewValue: 'Защитник' },
+    { value: 'Нападающий', viewValue: 'Нападающий' }
   ];
 
   constructor(
@@ -49,12 +49,14 @@ export class ProfileComponent implements OnInit {
   nickName = null;
 
   profileUpdateForm = this.profileUpdateFormBuilder.group({
+    uid: [''],
     email: [''],
     nickName: [''],
     name: [''],
     surname: [''],
     stick: [''],
-    role: ['']
+    role: [''],
+    admin: [''],
   });
 
   ngOnInit() {
@@ -63,10 +65,12 @@ export class ProfileComponent implements OnInit {
       .then(doc => {
         console.log(doc);
         if (doc.exists) {
-          const { email, nickName, name, surname, stick, role } = doc.data();
+          const { email, nickName, name, surname, stick, role, uid, admin } = doc.data();
           this.email = email;
           this.nickName = nickName;
           this.profileUpdateForm.setValue({
+            uid,
+            admin: admin || false,
             email,
             nickName,
             name,

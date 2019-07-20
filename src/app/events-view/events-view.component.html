@@ -7,20 +7,20 @@
     </div>
 
   </div>
-  <mat-card  fxFlexAlign.gt-xs="center">
+  <mat-card fxFlexAlign.gt-xs="center">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
 
-        <mat-card-title>ЧТО?</mat-card-title>
-        <mat-card-subtitle>ГДЕ? КОГДА?</mat-card-subtitle>
+      <mat-card-title>ЧТО?</mat-card-title>
+      <mat-card-subtitle>ГДЕ? КОГДА?</mat-card-subtitle>
 
       <button mat-icon-button [matMenuTriggerFor]="menu">
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
         <button
-mat-menu-item value="click to copy"
-         >
+          mat-menu-item value="click to copy"
+        >
           <mat-icon>content_copy</mat-icon>
           <span>Копировать составы</span>
         </button>
@@ -42,7 +42,7 @@ mat-menu-item value="click to copy"
     </mat-card-content>
     <mat-card-content>
       <p>
-        Будет  / не будет
+        Будет / не будет
       </p>
     </mat-card-content>
   </mat-card>
@@ -50,9 +50,9 @@ mat-menu-item value="click to copy"
   <mat-divider fxLayoutGap="10px" class="mDivid"></mat-divider>
 
   <mat-list>
-    <mat-list-item>
+    <mat-list-item *ngFor="let player of changedEvent.players.accept">
       <mat-icon color="primary" matListIcon>done</mat-icon>
-      <h3 matLine> $имя $фамилия $позиция </h3>
+      <h3 matLine> {{player.name}} {{player.surname}} {{player.role}} </h3>
       <mat-select mat-Line value="">
         <mat-option value="black">Черный</mat-option>
         <mat-option value="white">Белый</mat-option>
@@ -67,9 +67,9 @@ mat-menu-item value="click to copy"
   <mat-divider fxLayoutGap="10px" class="mDivid"></mat-divider>
 
   <mat-list>
-    <mat-list-item>
+    <mat-list-item *ngFor="let player of changedEvent.players.reject">
       <mat-icon color="warn" matListIcon>clear</mat-icon>
-      <h3 matLine> $имя $фамилия $позиция </h3>
+      <h3 matLine> {{player.name}} {{player.surname}} {{player.role}} </h3>
 
     </mat-list-item>
   </mat-list>
@@ -77,13 +77,12 @@ mat-menu-item value="click to copy"
   <mat-divider fxLayoutGap="10px" class="mDivid"></mat-divider>
 
   <mat-list>
-    <mat-list-item>
-      <mat-icon  matListIcon>priority_high</mat-icon>
-      <h3 matLine> $имя $фамилия $позиция </h3>
+    <mat-list-item *ngFor="let player of noVotedUsers">
+      <mat-icon matListIcon>priority_high</mat-icon>
+      <h3 matLine> {{player.name}} {{player.surname}} {{player.role}}</h3>
 
     </mat-list-item>
   </mat-list>
-
 
 
 </div>

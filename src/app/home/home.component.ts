@@ -47,7 +47,6 @@ export class HomeComponent implements OnInit {
       .catch(err => {
         console.log('Error getting document', err);
       });
-    // this.eventsCollection = this.afs.collection('events', ref => ref.where('gameDay', '==', 'Для всех').orderBy('gameDay'));
     this.eventsCollection = this.afs.collection('events', ref => ref.limit(10).orderBy('gameDay', 'desc'));
     this.eventsCollection.snapshotChanges().subscribe(eventsList => {
       const events = eventsList.map(item => {
@@ -80,18 +79,14 @@ export class HomeComponent implements OnInit {
 
     const oldPlayers = [...players.accept, ...players.reject];
     const currUserUid = this.user.uid;
-    const color = '';
-    const matchUp = '';
     const oldRecordId = oldPlayers.findIndex(player => player.uid === currUserUid);
-    oldPlayers.splice(oldRecordId, oldRecordId);
+    oldPlayers.splice(oldRecordId, 1);
     players = [...oldPlayers, {
       status,
       name,
       surname,
       role,
       uid: this.user.uid,
-      color,
-      matchUp
     }];
 
     this.afs.collection('events').doc(eventId).update({
@@ -118,8 +113,8 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/profile');
   }
 
-  viewDetails() {
-    this.router.navigateByUrl('/view');
+  viewDetails(params) {
+    this.router.navigate(['view'], { queryParams: { param: JSON.stringify(params) } });
   }
 
   copyMessage(playersObj: Array<any>) {

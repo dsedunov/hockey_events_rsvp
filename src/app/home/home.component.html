@@ -11,7 +11,7 @@
       <mat-card *ngFor="let event of eventsFuture" fxFlexAlign.gt-xs="center">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <div (click)="user && user.admin? viewDetails(): null">
+          <div (click)="user && user.admin? viewDetails(event): null">
             <mat-card-title>{{event.gameType}}</mat-card-title>
             <mat-card-subtitle>{{event.where}}</mat-card-subtitle>
           </div>

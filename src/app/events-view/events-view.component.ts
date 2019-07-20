@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-events-view',
@@ -12,8 +12,14 @@ import { Router } from '@angular/router';
 })
 export class EventsViewComponent implements OnInit {
 
+  whiteListCollection: AngularFirestoreCollection<any>;
+  usersCollection: AngularFirestoreCollection<any>;
+  noVotedUsers: Array<any>;
+  changedEvent: any;
+
   constructor(
     private afs: AngularFirestore,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private eventFormBuilder: FormBuilder,
     private firebaseAuth: AngularFireAuth,
@@ -22,6 +28,29 @@ export class EventsViewComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.activatedRoute.queryParams.subscribe((params) => {
+      this.changedEvent = JSON.parse(params.param);
+    });
+
+    this.whiteListCollection = this.afs.collection('list');
+    this.whiteListCollection.snapshotChanges().subscribe(([usersWhiteList]) => {
+      const whiteListArr = Object.keys(usersWhiteList.payload.doc.data());
+      this.usersCollection = this.afs.collection('users', ref => ref.limit(200));
+      this.usersCollection.snapshotChanges().subscribe((usersRef) => {
+        const users = usersRef.map(userRef => {
+          return userRef.payload.doc.data();
+        });
+
+        const accptedUID = this.changedEvent.players.accept && this.changedEvent.players.accept.map(player => player.uid);
+        const rejectedUID = this.changedEvent.players.reject && this.changedEvent.players.reject.map(player => player.uid);
+
+        this.noVotedUsers = users.filter(user => {
+          return (whiteListArr.indexOf(user.uid) !== -1 && accptedUID.indexOf(user.uid) === -1 && rejectedUID.indexOf(user.uid) === -1);
+        });
+      });
+    });
+
   }
 
   backToHome() {
