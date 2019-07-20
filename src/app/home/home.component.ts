@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material';
-import { PushNotificationOptions, PushNotificationService } from 'ngx-push-notifications';
+// import { PushNotificationOptions, PushNotificationService } from 'ngx-push-notifications';
 
 
 @Component({
@@ -27,13 +27,13 @@ export class HomeComponent implements OnInit {
     private afs: AngularFirestore,
     private router: Router,
     private snackBar: MatSnackBar,
-    private _pushNotificationService: PushNotificationService,
+    // private _pushNotificationService: PushNotificationService,
   ) {
   }
 
   async ngOnInit() {
-    const isGranted = this._pushNotificationService.isPermissionGranted;
-    this._pushNotificationService.requestPermission();
+    // const isGranted = this._pushNotificationService.isPermissionGranted;
+    // this._pushNotificationService.requestPermission();
     const usersRef = this.afs.collection('users').doc((this.firebaseAuth.auth.currentUser.email).toLowerCase()).ref;
     await usersRef.get()
       .then(doc => {
@@ -140,33 +140,6 @@ export class HomeComponent implements OnInit {
     document.body.removeChild(selBox);
   }
 
-  notifyOnEvent() {
-    const title = 'Привет $юзер у тебя скоро хоккей';
-    const options = new PushNotificationOptions();
-    options.silent = false,
-    options.sticky = true,
-    options.lang = 'Russian',
-    options.body = '$type $date придешь?',
-    options.icon = 'assets/icons/apple-icon-114x114.png';
-    // options.actions = [{ action: 'yes', title: 'Yes', icon: 'images/yes.png' },
-    // { action: 'no', title: 'No', icon: 'images/no.png' }];
-
-    this._pushNotificationService.create(title, options).subscribe((notif) => {
-      if (notif.event.type === 'show') {
-        console.log('onshow');
-
-      }
-      if (notif.event.type === 'click') {
-        console.log('click');
-        notif.notification.close();
-      }
-      if (notif.event.type === 'close') {
-        console.log('close');
-      }
-    },
-    (err) => {
-         console.log(err);
-    });
-}
+//
 
 }
