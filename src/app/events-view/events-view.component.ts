@@ -41,13 +41,24 @@ export class EventsViewComponent implements OnInit {
         const users = usersRef.map(userRef => {
           return userRef.payload.doc.data();
         });
-
+        this.changedEvent.players.accept = this.changedEvent.players.accept
+          .sort(({ role: roleA }, { role: roleB }) => {
+            return roleA !== 'Вратарь' ? 1 : -1;
+          });
+        this.changedEvent.players.reject = this.changedEvent.players.reject
+          .sort(({ role: roleA }, { role: roleB }) => {
+            return roleA !== 'Вратарь' ? 1 : -1;
+          });
         const accptedUID = this.changedEvent.players.accept && this.changedEvent.players.accept.map(player => player.uid);
         const rejectedUID = this.changedEvent.players.reject && this.changedEvent.players.reject.map(player => player.uid);
 
-        this.noVotedUsers = users.filter(user => {
-          return (whiteListArr.indexOf(user.uid) !== -1 && accptedUID.indexOf(user.uid) === -1 && rejectedUID.indexOf(user.uid) === -1);
-        });
+        this.noVotedUsers = users
+          .filter(user => {
+            return (whiteListArr.indexOf(user.uid) !== -1 && accptedUID.indexOf(user.uid) === -1 && rejectedUID.indexOf(user.uid) === -1);
+          })
+          .sort(({ role: roleA }, { role: roleB }) => {
+            return roleA !== 'Вратарь' ? 1 : -1;
+          });
       });
     });
 

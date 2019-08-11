@@ -37,6 +37,9 @@ export class RegComponent implements OnInit {
   });
 
   ngOnInit() {
+    if (this.user) {
+      this.router.navigateByUrl('/home');
+    }
   }
 
   openSnackBar(message: string) {

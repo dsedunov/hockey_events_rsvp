@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireMessaging } from '@angular/fire/messaging';
-import { mergeMapTo } from 'rxjs/operators';
 import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 
@@ -16,9 +15,9 @@ export class MessagingService {
     private angularFireAuth: AngularFireAuth,
     private angularFireMessaging: AngularFireMessaging) {
     this.angularFireMessaging.messaging.subscribe(
-      (_messaging) => {
-        _messaging.onMessage = _messaging.onMessage.bind(_messaging);
-        _messaging.onTokenRefresh = _messaging.onTokenRefresh.bind(_messaging);
+      (messaging) => {
+        messaging.onMessage = messaging.onMessage.bind(messaging);
+        messaging.onTokenRefresh = messaging.onTokenRefresh.bind(messaging);
       }
     );
   }

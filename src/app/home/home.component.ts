@@ -80,7 +80,11 @@ export class HomeComponent implements OnInit {
     const oldPlayers = [...players.accept, ...players.reject];
     const currUserUid = this.user.uid;
     const oldRecordId = oldPlayers.findIndex(player => player.uid === currUserUid);
-    oldPlayers.splice(oldRecordId, 1);
+
+    if (Number(oldRecordId) + 1) {
+      oldPlayers.splice(oldRecordId, 1);
+    }
+
     players = [...oldPlayers, {
       status,
       name,
