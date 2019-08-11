@@ -65,16 +65,19 @@ export class EventsViewComponent implements OnInit {
   }
 
   updateRoster() {
+    this.changedEvent = {
+      ...this.changedEvent,
+      gameDay: this.changedEvent.gameDayISO,
+      players: [...this.changedEvent.players.accept, ...this.changedEvent.players.reject]
+    };
+    delete this.changedEvent.gameDayISO;
 
-    //TODO даты исправить
-    let gameDay = new Date(this.changedEvent.gameDay).toISOString();
-    gameDay = gameDay.substr(0, gameDay.lastIndexOf(':'));
-
-    this.afs.collection('events').doc(gameDay).set(this.changedEvent)
+    this.afs.collection('events').doc(this.changedEvent.id).set(this.changedEvent)
       .then(() => {
         this.snackBar.open('Данные успешно изменены', 'ok', {
           duration: 10000,
         });
+        this.router.navigateByUrl('/home');
       })
       .catch(err => {
         console.log(err);
