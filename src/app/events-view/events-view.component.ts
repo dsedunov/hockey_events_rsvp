@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./events-view.component.scss']
 })
 export class EventsViewComponent implements OnInit {
-
+  selected: string;
   whiteListCollection: AngularFirestoreCollection<any>;
   usersCollection: AngularFirestoreCollection<any>;
   noVotedUsers: Array<any>;
@@ -45,10 +45,6 @@ export class EventsViewComponent implements OnInit {
           .sort(({ role: roleA }, { role: roleB }) => {
             return roleA !== 'Вратарь' ? 1 : -1;
           });
-        this.changedEvent.players.reject = this.changedEvent.players.reject
-          .sort(({ role: roleA }, { role: roleB }) => {
-            return roleA !== 'Вратарь' ? 1 : -1;
-          });
         const accptedUID = this.changedEvent.players.accept && this.changedEvent.players.accept.map(player => player.uid);
         const rejectedUID = this.changedEvent.players.reject && this.changedEvent.players.reject.map(player => player.uid);
 
@@ -66,6 +62,23 @@ export class EventsViewComponent implements OnInit {
 
   backToHome() {
     this.router.navigateByUrl('/home');
+  }
+
+  updateRoster() {
+
+    //TODO даты исправить
+    let gameDay = new Date(this.changedEvent.gameDay).toISOString();
+    gameDay = gameDay.substr(0, gameDay.lastIndexOf(':'));
+
+    this.afs.collection('events').doc(gameDay).set(this.changedEvent)
+      .then(() => {
+        this.snackBar.open('Данные успешно изменены', 'ok', {
+          duration: 10000,
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 
 }

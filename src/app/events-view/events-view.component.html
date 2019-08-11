@@ -33,7 +33,9 @@
           <span>Удалить</span>
         </button>
       </mat-menu>
-
+      <button (click)="updateRoster()">
+        Hello
+      </button>
     </mat-card-header>
 
     <mat-card-content>
@@ -50,14 +52,27 @@
   <mat-divider fxLayoutGap="10px" class="mDivid"></mat-divider>
 
   <mat-list>
-    <mat-list-item *ngFor="let player of changedEvent.players.accept">
+    <mat-list-item *ngFor="let player of  this.changedEvent.players.accept | sort; index as i"
+                   [ngClass]="{
+      'firstElementAfterGoalie':player.role!=='Вратарь',
+    'firstElementUndef':!player.color&&player.role!=='Вратарь',
+    'firstElementBlack':player.color==='black'}">
+
       <mat-icon color="primary" matListIcon>done</mat-icon>
-      <h3 matLine> {{player.name}} {{player.surname}} {{player.role}} </h3>
-      <mat-select mat-Line value="">
+      <p matLine> {{player.name[0]}}. {{player.surname}} {{player.role}}</p>
+      <mat-select [(value)]="player.color"
+                  *ngIf="player.role!=='Вратарь'"
+                  class="color"
+                  value="{{player.color}}">
         <mat-option value="black">Черный</mat-option>
         <mat-option value="white">Белый</mat-option>
       </mat-select>
-      <mat-select mat-Line value="">
+      <mat-select [(value)]="player.number"
+                  *ngIf="player.role!=='Вратарь'"
+                  class="number"
+                  [ngClass]="{'disabled-element':!player.color}"
+                  disabled="{{!player.color}}"
+                  value="player.number">
         <mat-option value="1">1</mat-option>
         <mat-option value="2">2</mat-option>
         <mat-option value="3">3</mat-option>
@@ -69,7 +84,7 @@
   <mat-list>
     <mat-list-item *ngFor="let player of changedEvent.players.reject">
       <mat-icon color="warn" matListIcon>clear</mat-icon>
-      <h3 matLine> {{player.name}} {{player.surname}} {{player.role}} </h3>
+      <p matLine> {{player.name[0]}}. {{player.surname}} {{player.role}} </p>
 
     </mat-list-item>
   </mat-list>
@@ -79,10 +94,9 @@
   <mat-list>
     <mat-list-item *ngFor="let player of noVotedUsers">
       <mat-icon matListIcon>priority_high</mat-icon>
-      <h3 matLine> {{player.name}} {{player.surname}} {{player.role}}</h3>
+      <p matLine> {{player.name[0]}}. {{player.surname}} {{player.role}}</p>
 
     </mat-list-item>
   </mat-list>
-
 
 </div>

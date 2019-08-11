@@ -5,3 +5,39 @@
   border-top-width: 30px;
   border-top-style: solid;
 }
+
+.color {
+  width: 10rem
+}
+
+.number {
+  width: 100px
+}
+
+.firstElementAfterGoalie {
+  border-top: #2f2f2f 5px solid;
+}
+
+.firstElementAfterGoalie ~ .firstElementAfterGoalie {
+  border: none;
+}
+
+.firstElementBlack {
+  border-top: #2f2f2f 5px solid !important;
+}
+
+.firstElementBlack ~ .firstElementBlack {
+  border: none !important;
+}
+
+.firstElementUndef {
+  border-top: #2f2f2f 5px solid !important;
+}
+
+.firstElementUndef ~ .firstElementUndef {
+  border: none !important;
+}
+
+.disabled-element {
+  opacity: 0.3;
+}
