@@ -3,10 +3,11 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 admin.initializeApp(functions.config().firebase);
 
-exports.sendMessageOnCreateEvent = functions.firestore.document('events/{eventName}').onCreate((event) => {
+exports.sendMessageOnCreateEvent = functions.firestore.document('events/{eventName}').onCreate((change,context) => {
 
-  const {gameDay:date,gameType,where}=event.data.val();
+  const {gameDay, gameType, where} = change.data() ;
 
+  const date= new Date(gameDay);
 
   const payload = {
     notification: {
@@ -20,13 +21,16 @@ exports.sendMessageOnCreateEvent = functions.firestore.document('events/{eventNa
     .ref('/fcmTokens')
     .once('value')
     .then(snap => {
-      snap
-      .reduce((result,childSnap)=>{
-        const token = childSnap.val();
+      const newSnap=[]
+      snap.forEach(childSnap => {
+        newSnap.push({val: childSnap.val()});
+      })
+
+      newSnap.reduce((result,childSnap)=>{
+        const token = childSnap.val;
         return result.find(({val}) => val === token)? result : [...result,{val:token}]
       },[])
       .forEach(childSnap => {
-        const key = childSnap.key;
         const token = childSnap.val;
         admin.messaging().sendToDevice(token, payload)
           .then(res => {
