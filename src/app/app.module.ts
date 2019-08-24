@@ -37,6 +37,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 // import { AsyncPipe } from '../../node_modules/@angular/common';
 import { PlayersSortPipe } from './pipes/players-sort.pipe';
 import {MatDialogModule} from '@angular/material/dialog';
+import {FileNameDialogComponent} from './events-view/file-name-dialog.component';
 
 
 
@@ -48,7 +49,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     HomeComponent,
     EventFormComponent,
     ProfileComponent,
-    EventsViewComponent
+    EventsViewComponent,
+    FileNameDialogComponent
   ],
   imports: [
     MatSnackBarModule,
@@ -83,7 +85,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 
   ],
   providers: [AuthGuard, PlayersSortPipe, MessagingService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [FileNameDialogComponent]
 })
 export class AppModule {
 }
