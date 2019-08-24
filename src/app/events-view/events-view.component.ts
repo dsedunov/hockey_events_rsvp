@@ -64,6 +64,26 @@ export class EventsViewComponent implements OnInit {
     this.router.navigateByUrl('/home');
   }
 
+  addGuetst() {
+    this.changedEvent = {
+      ...this.changedEvent,
+      gameDay: this.changedEvent.gameDayISO,
+      players: [{ name: 'newBoi', status: 'accept' }, ...this.changedEvent.players.accept, ...this.changedEvent.players.reject]
+    };
+    delete this.changedEvent.gameDayISO;
+
+    this.afs.collection('events').doc(this.changedEvent.id).set(this.changedEvent)
+      .then(() => {
+        this.snackBar.open('Гость успешно добавлен', 'ok', {
+          duration: 10000,
+        });
+        this.router.navigateByUrl('/home');
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  }
+
   updateRoster() {
     this.changedEvent = {
       ...this.changedEvent,
