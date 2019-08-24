@@ -4,7 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
-import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-events-view',
@@ -28,7 +28,7 @@ export class EventsViewComponent implements OnInit {
     private router: Router,
     private eventFormBuilder: FormBuilder,
     private firebaseAuth: AngularFireAuth,
-    private snackBar: MatSnackBar,
+    private snackBar: MatSnackBar
   ) {
   }
 

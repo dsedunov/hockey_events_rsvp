@@ -23,9 +23,9 @@
               <mat-icon>content_copy</mat-icon>
               <span>Копировать составы</span>
             </button>
-            <button mat-menu-item>
+            <button mat-menu-item (click)="openFileDialog(event)">
               <mat-icon>notifications</mat-icon>
-              <span>Отправить уведомление</span>
+              <span>Добавить гостя</span>
             </button>
             <button mat-menu-item (click)="removeEvent(event.id)">
               <mat-icon>delete</mat-icon>

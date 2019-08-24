@@ -4,6 +4,9 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material';
 import { MessagingService } from '../messaging.service';
+import {VERSION, MatDialog, MatDialogRef} from '@angular/material';
+import { FileNameDialogComponent } from '../home/file-name-dialog.component';
+import { filter } from 'rxjs/operators';
 
 // import { PushNotificationOptions, PushNotificationService } from 'ngx-push-notifications';
 
@@ -24,12 +27,26 @@ export class HomeComponent implements OnInit {
   user = null;
   message;
 
+  version = VERSION;
+
+  fileNameDialogRef: MatDialogRef<FileNameDialogComponent>;
+
+  files = [
+    { name: 'foo.js', content: ''}
+    ];
+
+  openFileDialog(event) {
+    this.fileNameDialogRef = this.dialog.open(FileNameDialogComponent, {
+      data: {event: JSON.stringify(event)}});
+  }
+
   constructor(
     private messagingService: MessagingService,
     private firebaseAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
     private snackBar: MatSnackBar,
+    private dialog: MatDialog
     // private _pushNotificationService: PushNotificationService,
   ) {
   }

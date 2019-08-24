@@ -37,7 +37,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 // import { AsyncPipe } from '../../node_modules/@angular/common';
 import { PlayersSortPipe } from './pipes/players-sort.pipe';
 import {MatDialogModule} from '@angular/material/dialog';
-import {FileNameDialogComponent} from './events-view/file-name-dialog.component';
+import {FileNameDialogComponent} from './home/file-name-dialog.component';
 
 
 
