@@ -36,6 +36,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 // import { AsyncPipe } from '../../node_modules/@angular/common';
 import { PlayersSortPipe } from './pipes/players-sort.pipe';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import { PlayersSortPipe } from './pipes/players-sort.pipe';
     AngularFireDatabaseModule,
     // AsyncPipe,
     AngularFireAuthModule,
+    AngularFireFunctionsModule,
     AngularFireMessagingModule,
     MatListModule,
     BrowserModule,

@@ -9,14 +9,4 @@ import { MessagingService } from './messaging.service';
 })
 export class AppComponent {
   title = 'DC LEPERS PORTAL';
-  message;
-
-  constructor(private messagingService: MessagingService) { }
-
-  ngOnInit() {
-    const userId = 'user001';
-    this.messagingService.requestPermission(userId);
-    this.messagingService.receiveMessage();
-    this.message = this.messagingService.currentMessage;
-  }
 }
