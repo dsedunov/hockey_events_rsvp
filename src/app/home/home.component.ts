@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material';
+import { MessagingService } from '../messaging.service';
 
 // import { PushNotificationOptions, PushNotificationService } from 'ngx-push-notifications';
 
@@ -21,8 +22,10 @@ export class HomeComponent implements OnInit {
   eventsPast: Array<any>;
   eventsCollection: AngularFirestoreCollection<any>;
   user = null;
+  message;
 
   constructor(
+    private messagingService: MessagingService,
     private firebaseAuth: AngularFireAuth,
     private afs: AngularFirestore,
     private router: Router,
@@ -40,6 +43,10 @@ export class HomeComponent implements OnInit {
         if (doc.exists) {
           this.user = doc.data();
           this.user.uid = this.firebaseAuth.auth.currentUser.uid;
+          const userId = this.user.uid;
+          this.messagingService.requestPermission(userId);
+          this.messagingService.receiveMessage();
+          this.message = this.messagingService.currentMessage;
         } else {
           console.log('No such document!');
         }
