@@ -1,1 +1,11 @@
-{}
+{
+  "hosting": {
+    "public": "./dist/events",
+    "site" : "dclepers",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

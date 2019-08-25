@@ -10,10 +10,15 @@ exports.sendMessageOnCreateEvent = functions.firestore.document('events/{eventNa
   const date= new Date(gameDay);
 
   const payload = {
-    notification: {
-      title: `У тебя новая ${gameType}! Откликайся скорее!`,
-      body: `Она состоится ${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getUTCFullYear()} ${date.getUTCHours()+3}:${date.getUTCMinutes()} ${where}`,
-      icon: "https://https://firebasestorage.googleapis.com/v0/b/dc-lepers-4edc7.appspot.com/o/1470760630-removebg-preview.png?alt=media&token=a7fdd83d-ea9d-4e90-b26d-547f6a0a7cc2.com/250/250/people"
+    'notification': {
+      'title': `У тебя новая ${gameType}! Откликайся скорее!`,
+      'body': `Она состоится ${date.getUTCDate()}/${date.getUTCMonth()+1}/${date.getUTCFullYear()} ${date.getUTCHours()+3}:${date.getUTCMinutes()} ${where}`,
+      'icon': 'https://firebasestorage.googleapis.com/v0/b/dc-lepers-4edc7.appspot.com/o/1470760630-removebg-preview.png?alt=media&token=a7fdd83d-ea9d-4e90-b26d-547f6a0a7cc2',
+      'vibrate':'[100, 50, 100]',
+      'sound': 'default',
+      'requireInteraction': 'true',
+      'renotify': 'true',
+      'click_action' : 'https://dclepers.web.app',
     }
   };
 
