@@ -42,7 +42,8 @@ export class EventFormComponent implements OnInit {
     where: [''],
     gameDay: [''],
     vType: [''],
-    gameType: ['']
+    gameType: [''],
+    rival: ['']
   });
 
   ngOnInit() {

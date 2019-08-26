@@ -11,10 +11,8 @@
       <mat-card *ngFor="let event of eventsFuture" fxFlexAlign.gt-xs="center">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <div (click)="user && user.admin? viewDetails(event): null">
-            <mat-card-title>{{event.gameType}}</mat-card-title>
-            <mat-card-subtitle>{{event.where}}</mat-card-subtitle>
-          </div>
+          <div *ngIf="event.rival; else elseBlock">DC Lepers Против {{event.rival}}</div>
+<ng-template #elseBlock>{{event.gameType}}</ng-template>
           <button *ngIf="user && user.admin" mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
           </button>

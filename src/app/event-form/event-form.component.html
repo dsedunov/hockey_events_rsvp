@@ -34,6 +34,7 @@
               {{season}}
             </mat-radio-button>
           </mat-radio-group>
+
           <mat-form-field>
             <mat-label>Тип</mat-label>
             <mat-select formControlName="gameType" [(value)]="gameTypeSelected">
@@ -41,6 +42,13 @@
                 {{GameType.viewValue}}
               </mat-option>
             </mat-select>
+          </mat-form-field>
+
+          <mat-form-field *ngIf="gameTypeSelected == 'Игра'" appearance="outline">
+            <mat-label>Соперник</mat-label>
+            <input type='text'
+            matInput
+            formControlName="rival"  placeholder="Соперник">
           </mat-form-field>
 
           <div fxLayout="row"
