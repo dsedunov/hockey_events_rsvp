@@ -9,10 +9,11 @@
     <!-- Таб для текущих событий -->
     <mat-tab label="Текущие">
       <mat-card *ngFor="let event of eventsFuture" fxFlexAlign.gt-xs="center">
-        <mat-card-header>
+        <mat-card-header (click)="user && user.admin? viewDetails(event): null">
           <div mat-card-avatar class="example-header-image"></div>
-          <div *ngIf="event.rival; else elseBlock">DC Lepers Против {{event.rival}}</div>
-<ng-template #elseBlock>{{event.gameType}}</ng-template>
+          <div  *ngIf="event.rival; else elseBlock">DC Lepers Против {{event.rival}}.</div>
+<ng-template  #elseBlock>{{event.gameType}}</ng-template>
+
           <button *ngIf="user && user.admin" mat-icon-button [matMenuTriggerFor]="menu">
             <mat-icon>more_vert</mat-icon>
           </button>
@@ -57,28 +58,54 @@
         </mat-card-actions>
       </mat-card>
     </mat-tab>
-    <!-- Таб для регистрации -->
+    <!-- Таб для прошедших -->
     <mat-tab label="Прошедшие">
-      <mat-card *ngFor="let event of eventsPast" fxFlexAlign.gt-xs="center">
-        <mat-card-header>
-          <div mat-card-avatar class="example-header-image"></div>
-          <div (click)="user && user.admin? viewDetails(): null">
-            <mat-card-title>{{event.gameType}}</mat-card-title>
-            <mat-card-subtitle>{{event.where}}</mat-card-subtitle>
-          </div>
-        </mat-card-header>
+      <div class="card" *ngFor="let event of eventsPast" >
 
-        <mat-card-content>
-          <p>
-            {{event.gameDay}}
-          </p>
-        </mat-card-content>
-        <mat-card-content>
-          <p>
-            Будет {{ event.players.accept.length }} / не будет {{ event.players.reject.length }}
-          </p>
-        </mat-card-content>
-      </mat-card>
+          <div  (click)="user && user.admin? viewDetails(): null">
+
+          </div>
+<!-- Шапка -->
+          <div >
+            <div class="gameDate" >
+                <mat-icon>calendar_today</mat-icon>
+                {{event.gameDay}}
+            </div>
+          </div>
+
+<!-- Соперник и адрес -->
+          <div>
+<div class ="gametype"  *ngIf="event.rival; else elseBlock">DC Lepers : {{event.rival}}.</div>
+<ng-template  #elseBlock>{{event.gameType}}</ng-template>
+<div>
+    <div class="adress" >
+        <div >
+            <mat-icon>place</mat-icon>
+            {{event.where}}
+        </div>
+      </div>
+
+
+</div>
+          </div>
+<!-- Counter -->
+<div class="mDivid">
+</div>
+        <!-- <div>
+          <div class="roundYes" >
+            {{ event.players.accept.length }}
+          </div>
+          <div class="yes">
+            будет
+          </div>
+          <div class="roundNo">
+             {{ event.players.reject.length }}
+          </div>
+          <div class="no">
+            не будет
+         </div>
+        </div> -->
+      </div>
     </mat-tab>
   </mat-tab-group>
 </div>
