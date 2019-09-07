@@ -1,113 +1,85 @@
 <div class="mainDiv">
-  <mat-toolbar fxLayoutAlign="end center">
+  <mat-toolbar fxLayoutAlign="end center" class="headerHome">
     <button mat-icon-button (click)="goToProfile()">
       <mat-icon>account_circle</mat-icon>
     </button>
   </mat-toolbar>
-  <mat-tab-group>
+  <mat-card *ngFor="let event of eventsFuture" class="homeCard">
 
-    <!-- Таб для текущих событий -->
-    <mat-tab label="Текущие">
-      <mat-card *ngFor="let event of eventsFuture" fxFlexAlign.gt-xs="center">
-        <mat-card-header (click)="user && user.admin? viewDetails(event): null">
-          <div mat-card-avatar class="example-header-image"></div>
-          <div  *ngIf="event.rival; else elseBlock">DC Lepers Против {{event.rival}}.</div>
-<ng-template  #elseBlock>{{event.gameType}}</ng-template>
-
-          <button *ngIf="user && user.admin" mat-icon-button [matMenuTriggerFor]="menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item (click)="copyMessage(event.players.accept)" value="click to copy">
-              <mat-icon>content_copy</mat-icon>
-              <span>Копировать составы</span>
-            </button>
-            <button mat-menu-item (click)="openFileDialog(event)">
-              <mat-icon>notifications</mat-icon>
-              <span>Добавить гостя</span>
-            </button>
-            <button mat-menu-item (click)="removeEvent(event.id)">
-              <mat-icon>delete</mat-icon>
-              <span>Удалить</span>
-            </button>
-          </mat-menu>
-
-        </mat-card-header>
-
-        <mat-card-content>
+    <mat-card-content class="card">
+      <div class="dttm">
+        <div>
           <p>
             {{event.gameDay}}
           </p>
-        </mat-card-content>
-        <mat-card-content>
+        </div>
+        <button *ngIf="user && user.admin" mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu id="menuButton" #menu="matMenu">
+          <button mat-menu-item (click)="viewDetails(event)">
+            <mat-icon>notifications</mat-icon>
+            <span>Информация</span>
+          </button>
+          <button mat-menu-item (click)="copyMessage(event.players.accept)" value="click to copy">
+            <mat-icon>content_copy</mat-icon>
+            <span>Копировать составы</span>
+          </button>
+          <button mat-menu-item (click)="openFileDialog(event)">
+            <mat-icon>notifications</mat-icon>
+            <span>Добавить гостя</span>
+          </button>
+          <button mat-menu-item (click)="removeEvent(event.id)">
+            <mat-icon>delete</mat-icon>
+            <span>Удалить</span>
+          </button>
+        </mat-menu>
+      </div>
+      <div *ngIf="event.rival; else elseBlock">DC Lepers Против {{event.rival}}.</div>
+      <ng-template #elseBlock>{{event.gameType}}</ng-template>
+    </mat-card-content>
+
+    <mat-card-content class="playersScore">
+      <div class="score gold">
+        <div class="number">
           <p>
-            Будет {{ event.players.accept.length }} / не будет {{ event.players.reject.length }}
+            {{ event.players.accept.length }}
           </p>
-        </mat-card-content>
-        <mat-card-actions fxLayout="row" fxLayoutAlign="space-evenly center">
-          <button mat-stroked-button [disabled]="false"
-                  (click)="accessInvite(event.id, event.players,'accept')"
-                  [ngClass]="{'green' : event.whatIAmAnswer==='accept'}" mat-button>
-            Да
-          </button>
-          <button mat-stroked-button mat-button [disabled]="false"
-                  (click)="accessInvite(event.id, event.players,'reject')"
-                  [ngClass]="{'red' : event.whatIAmAnswer==='reject'}">
-            Нет
-          </button>
-        </mat-card-actions>
-      </mat-card>
-    </mat-tab>
-    <!-- Таб для прошедших -->
-    <mat-tab label="Прошедшие">
-      <div class="card" *ngFor="let event of eventsPast" >
-
-          <div  (click)="user && user.admin? viewDetails(): null">
-
-          </div>
-<!-- Шапка -->
-          <div >
-            <div class="gameDate" >
-                <mat-icon>calendar_today</mat-icon>
-                {{event.gameDay}}
-            </div>
-          </div>
-
-<!-- Соперник и адрес -->
-          <div>
-<div class ="gametype"  *ngIf="event.rival; else elseBlock">DC Lepers : {{event.rival}}.</div>
-<ng-template  #elseBlock>{{event.gameType}}</ng-template>
-<div>
-    <div class="adress" >
-        <div >
-            <mat-icon>place</mat-icon>
-            {{event.where}}
+        </div>
+        <div class="text">
+          <p>
+            будет
+          </p>
         </div>
       </div>
-
-
-</div>
-          </div>
-<!-- Counter -->
-<div class="mDivid">
-</div>
-        <!-- <div>
-          <div class="roundYes" >
-            {{ event.players.accept.length }}
-          </div>
-          <div class="yes">
-            будет
-          </div>
-          <div class="roundNo">
-             {{ event.players.reject.length }}
-          </div>
-          <div class="no">
+      <div class="score">
+        <div class="number">
+          <p>
+            {{ event.players.reject.length }}
+          </p>
+        </div>
+        <div class="text">
+          <p>
             не будет
-         </div>
-        </div> -->
+          </p>
+        </div>
       </div>
-    </mat-tab>
-  </mat-tab-group>
+    </mat-card-content>
+    <mat-card-actions fxLayout="row" class="ButtonHolder">
+      <button [disabled]="false"
+              (click)="accessInvite(event.id, event.players,'accept')"
+              [ngClass]="{'green' : event.whatIAmAnswer==='accept'}" mat-button
+              class="Button">
+        Иду!
+      </button>
+      <button mat-button [disabled]="false"
+              (click)="accessInvite(event.id, event.players,'reject')"
+              [ngClass]="{'red' : event.whatIAmAnswer==='reject'}"
+              class="Button">
+        Нет :-(
+      </button>
+    </mat-card-actions>
+  </mat-card>
 </div>
 <div *ngIf="user && user.admin" class="add-button">
   <button id="add-button" mat-fab color="primary" (click)="createEvent()">

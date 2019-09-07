@@ -4,7 +4,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { AngularFireAuth } from '@angular/fire/auth';
 import { MatSnackBar } from '@angular/material';
 import { MessagingService } from '../messaging.service';
-import {VERSION, MatDialog, MatDialogRef} from '@angular/material';
+import { VERSION, MatDialog, MatDialogRef } from '@angular/material';
 import { FileNameDialogComponent } from '../home/file-name-dialog.component';
 import { filter } from 'rxjs/operators';
 
@@ -32,12 +32,13 @@ export class HomeComponent implements OnInit {
   fileNameDialogRef: MatDialogRef<FileNameDialogComponent>;
 
   files = [
-    { name: 'foo.js', content: ''}
-    ];
+    { name: 'foo.js', content: '' }
+  ];
 
   openFileDialog(event) {
     this.fileNameDialogRef = this.dialog.open(FileNameDialogComponent, {
-      data: {event: JSON.stringify(event)}});
+      data: { event: JSON.stringify(event) }
+    });
   }
 
   constructor(
@@ -141,8 +142,10 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl('/profile');
   }
 
-  viewDetails(params) {
-    this.router.navigate(['view'], { queryParams: { param: JSON.stringify(params) } });
+  viewDetails(params?) {
+    if (params) {
+      this.router.navigate(['view'], { queryParams: { param: JSON.stringify(params) } });
+    }
   }
 
   copyMessage(playersObj: Array<any>) {

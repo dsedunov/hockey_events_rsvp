@@ -1,5 +1,5 @@
 .green {
-  background-color: green;
+  background-color: #dc8ea4;
 }
 
 .green:disabled, .red:disabled {
@@ -7,11 +7,89 @@
 }
 
 .red {
-  background-color: red;
+  background-color: #dc8ea4;
+}
+
+.headerHome {
+  background: #2F2F2F;
 }
 
 .mainDiv {
+  height: 100%;
+  background: #2F2F2F;
   position: relative;
+}
+
+.homeCard {
+  background: #404146;
+  width: 85%;
+  min-width: 325px;
+  margin: 16px auto;
+  padding-top: 0;
+
+  p {
+    margin: 0;
+  }
+
+  .dttm {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #menuButton {
+    position: absolute;
+  }
+
+  .playersScore {
+    border-top: 1px #2F2F2F solid;
+    padding-top: 1rem;
+    display: flex;
+
+    .score {
+      display: flex;
+      color: gray;
+      margin-right: 1rem;
+
+      .number {
+        height: 2rem;
+        width: 2rem;
+        border: grey solid 1px;
+        border-radius: 100px;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 0.5rem;
+      }
+
+      .text {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .gold {
+      display: flex;
+      color: gold;
+
+      .number {
+        border-color: gold;
+      }
+    }
+  }
+
+  .ButtonHolder {
+    justify-content: space-around;
+
+    .Button {
+      width: 48%;
+      margin: 0;
+      border: #6e6e76 1px solid;
+      border-radius: 4px;
+      font-weight: 400;
+    }
+  }
 }
 
 #add-button {
