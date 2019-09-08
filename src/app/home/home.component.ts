@@ -31,9 +31,6 @@ export class HomeComponent implements OnInit {
 
   fileNameDialogRef: MatDialogRef<FileNameDialogComponent>;
 
-  files = [
-    { name: 'foo.js', content: '' }
-  ];
 
   openFileDialog(event) {
     this.fileNameDialogRef = this.dialog.open(FileNameDialogComponent, {
@@ -88,7 +85,12 @@ export class HomeComponent implements OnInit {
           id: item.payload.doc.id,
           ...item.payload.doc.data(),
           gameDayISO: gameDay,
-          gameDay: new Date(gameDay).toLocaleDateString('en-US'),
+          gameDay: new Date(gameDay).toLocaleString('ru', {
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric'
+        }),
           players,
           whatIAmAnswer,
         };

@@ -6,23 +6,42 @@ import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   template: `
-    <form [formGroup]="guestForm" >
-      <h1 mat-dialog-title>Добавить гостя</h1>
-      <mat-dialog-content>
-        <mat-form-field>
-          <input type='text' formControlName="name" matInput placeholder="Имя">
+    <form  [formGroup]="guestForm" >
+      <h1 style="display: flex;
+      align-content: center;
+      justify-content: center;" mat-dialog-title>Добавить гостя</h1>
+      <mat-dialog-content style="display: block;
+      align-content: center;
+      justify-content: space-around;
+      margin: 12px;">
+        <mat-form-field  appearance="outline">
+        <mat-label>Имя</mat-label>
+          <input type='text' formControlName="name" matInput required>
         </mat-form-field>
-        <mat-form-field>
-        <mat-select formControlName="role">
+        <mat-form-field   appearance="outline">
+        <mat-select formControlName="role" required placeholder="Позиция">
         <mat-option value="Защитник">Защитник</mat-option>
         <mat-option value="Нападающий">Нападающий</mat-option>
         <mat-option value="Вратарь">Вратарь</mat-option>
       </mat-select>
         </mat-form-field>
       </mat-dialog-content>
-      <mat-dialog-actions>
-        <button mat-button type="submit" (click)="addGuests()">Ок</button>
-        <button mat-button type="button" (click)="dialogRef.close()">Отмена</button>
+      <mat-dialog-actions style="display: flex;
+      align-content: center;
+      justify-content: space-around;
+      margin: 0px;">
+        <button style="width: 45%;
+        margin: 0;
+        border: #dc8ea4 1px solid;
+        border-radius: 4px;
+        font-weight: 200;
+        font-size: 16px;" mat-button type="button" (click)="dialogRef.close()">Отмена</button>
+        <button style="width: 45%;
+        margin: 0;
+        background-color: #E98AA4;
+        border-radius: 4px;
+        font-weight: 200;
+        font-size: 16px;" mat-button type="submit" (click)="addGuests()">Ок</button>
       </mat-dialog-actions>
     </form>
   `

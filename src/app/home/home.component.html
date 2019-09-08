@@ -1,24 +1,26 @@
 <div class="mainDiv">
   <mat-toolbar fxLayoutAlign="end center" class="headerHome">
-    <button mat-icon-button (click)="goToProfile()">
-      <mat-icon>account_circle</mat-icon>
+    <mat-icon class="star">star</mat-icon>
+    <button class="settings" mat-icon-button (click)="goToProfile()">
+      <mat-icon>tune</mat-icon>
     </button>
   </mat-toolbar>
-  <mat-card *ngFor="let event of eventsFuture" class="homeCard">
+  <mat-card *ngFor="let event of eventsFuture" [ngClass]="{'trainBackground' : event.gameType==='Тренировка' ||  event.gameType==='Тренировка', 'gameBackground' : event.gameType==='Игра'}" class="homeCard">
 
     <mat-card-content class="card">
       <div class="dttm">
         <div>
           <p>
+              <mat-icon class="calendar">calendar_today</mat-icon>
             {{event.gameDay}}
           </p>
         </div>
-        <button *ngIf="user && user.admin" mat-icon-button [matMenuTriggerFor]="menu">
+        <button class="menu" *ngIf="user && user.admin" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu id="menuButton" #menu="matMenu">
           <button mat-menu-item (click)="viewDetails(event)">
-            <mat-icon>notifications</mat-icon>
+            <mat-icon>info</mat-icon>
             <span>Информация</span>
           </button>
           <button mat-menu-item (click)="copyMessage(event.players.accept)" value="click to copy">
@@ -26,7 +28,7 @@
             <span>Копировать составы</span>
           </button>
           <button mat-menu-item (click)="openFileDialog(event)">
-            <mat-icon>notifications</mat-icon>
+            <mat-icon>library_add</mat-icon>
             <span>Добавить гостя</span>
           </button>
           <button mat-menu-item (click)="removeEvent(event.id)">
@@ -35,8 +37,14 @@
           </button>
         </mat-menu>
       </div>
-      <div *ngIf="event.rival; else elseBlock">DC Lepers Против {{event.rival}}.</div>
-      <ng-template #elseBlock>{{event.gameType}}</ng-template>
+      <div class="gameType" *ngIf="event.rival; else elseBlock">DC Lepers : {{event.rival}}</div>
+      <ng-template class="gameType" #elseBlock>{{event.gameType}}</ng-template>
+      <div class="where">
+          <p>
+          <mat-icon class="wIcon">location_on</mat-icon>
+          {{event.where}}
+        </p>
+      </div>
     </mat-card-content>
 
     <mat-card-content class="playersScore">
@@ -82,7 +90,7 @@
   </mat-card>
 </div>
 <div *ngIf="user && user.admin" class="add-button">
-  <button id="add-button" mat-fab color="primary" (click)="createEvent()">
+  <button id="add-button" mat-fab (click)="createEvent()">
     <mat-icon>add</mat-icon>
   </button>
 </div>

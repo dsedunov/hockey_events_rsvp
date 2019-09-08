@@ -6,22 +6,58 @@
   opacity: 0.3;
 }
 
+.gameType {
+font-size: 18px;
+}
+
 .red {
   background-color: #dc8ea4;
 }
 
+.gameBackground {
+  background: rgba(233, 138, 164, 0.1);
+}
+
+.trainBackground {
+  background: #404146;
+}
+
+.where {
+  display: flex;
+  align-content: center;
+  margin-top: 1rem;
+  color: #AFADAD;
+  .wIcon {
+    color: #F1DBA9;
+    font-size: 11px;
+    height: 1px;
+    width: 11px;
+  }
+}
+
 .headerHome {
   background: #2F2F2F;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  .star {
+    color: #dc8ea4;
+    font-size: 28px;
+  }
+  .settings {
+    margin-left: 37%;
+    transform: rotate(90deg);
+  }
 }
 
 .mainDiv {
-  height: 100%;
+  height: auto;
   background: #2F2F2F;
   position: relative;
 }
 
 .homeCard {
-  background: #404146;
+  // background: #404146;
   width: 85%;
   min-width: 325px;
   margin: 16px auto;
@@ -35,6 +71,15 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    .calendar {
+      color: #F1DBA9;
+      font-size: 11px;
+      height: 1px;
+      width: 11px;
+    }
+    .menu {
+      width: 12px;
+    }
   }
 
   #menuButton {
@@ -61,6 +106,7 @@
         justify-content: center;
         align-items: center;
         margin-right: 0.5rem;
+        font-size: 16px;
       }
 
       .text {
@@ -85,9 +131,10 @@
     .Button {
       width: 48%;
       margin: 0;
-      border: #6e6e76 1px solid;
+      border: #dc8ea4 1px solid;
       border-radius: 4px;
-      font-weight: 400;
+      font-weight: 200;
+      font-size: 16px;
     }
   }
 }
@@ -96,6 +143,8 @@
   right: 20px;
   bottom: 10px;
   left: auto;
+  color: #ffffff;
+  background-color: #E98AA4;
   position: absolute;
 }
 
