@@ -1,10 +1,11 @@
 <div class="mainDiv">
-  <mat-toolbar fxLayoutAlign="end center" class="headerHome">
+  <div class="headerHome">
+      <mat-icon class="invIcon">keyboard_backspace</mat-icon>
     <mat-icon class="star">star</mat-icon>
     <button class="settings" mat-icon-button (click)="goToProfile()">
       <mat-icon>tune</mat-icon>
     </button>
-  </mat-toolbar>
+  </div>
   <mat-card *ngFor="let event of eventsFuture" [ngClass]="{'trainBackground' : event.gameType==='Тренировка' ||  event.gameType==='Тренировка', 'gameBackground' : event.gameType==='Игра'}" class="homeCard">
 
     <mat-card-content class="card">
