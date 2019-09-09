@@ -50,10 +50,34 @@ export class ProfileComponent implements OnInit {
 
   profileUpdateForm = this.profileUpdateFormBuilder.group({
     uid: [''],
-    email: [''],
-    nickName: [''],
-    name: [''],
-    surname: [''],
+    email: [
+      {
+        value : '',
+        disabled: true
+      },
+Validators.required
+  ],
+    nickName: [
+      {
+        value : '',
+        disabled: true
+      },
+Validators.required
+  ],
+    name: [
+      {
+        value : '',
+        disabled: true
+      },
+Validators.required
+  ],
+    surname: [
+      {
+        value : '',
+        disabled: true
+      },
+Validators.required
+  ],
     stick: [''],
     role: [''],
     admin: [''],

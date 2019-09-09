@@ -1,0 +1,73 @@
+.headerProf {
+  background: #2F2F2F;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  padding-top: 20px;
+  .star {
+    color: #dc8ea4;
+    font-size: 28px;
+    padding: 6px;
+  }
+  .icons {
+    color: #ffffff;
+  }
+}
+
+.input {
+  width: 98%;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.profCard {
+  width: 85%;
+  background: #2F2F2F;
+  display: block;
+  box-shadow: none !important;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  margin-left: 16px;
+  justify-content: center;
+
+}
+
+.mainDiv {
+  height: auto;
+  background: #2F2F2F;
+  position: relative;
+}
+
+.title {
+  margin-left:-15px;
+}
+
+.ButtonHolder {
+  justify-content: space-around;
+
+  .Button {
+    width: 98%;
+    height: 40px;
+    margin: 0;
+    background: #dc8ea4;
+    border-radius: 4px;
+    font-weight: 200;
+    font-size: 16px;
+  }
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #B2B5BF;
+  border: 1px;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #F1DBA9 !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #F1DBA9 !important;
+}
+::ng-deep .mat-input-element {
+  caret-color: #F1DBA9 !important;
+}

@@ -1,47 +1,46 @@
-<div>
-  <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="200px">
-    <div>
-      <button mat-icon-button color="warn" (click)="backToHome()">
+<div class="mainDiv">
+  <div class="headerProf">
+
+      <button class="icons" mat-icon-button  (click)="backToHome()">
         <mat-icon>keyboard_backspace</mat-icon>
       </button>
-    </div>
+      <mat-icon class="star">star</mat-icon>
 
-
-    <button mat-raised-button color="warn" (click)="logout()">
+    <button class="icons" mat-icon-button  (click)="logout()">
       <mat-icon>exit_to_app</mat-icon>
-      logout
     </button>
 
   </div>
-  <mat-card>
+  <div>
+  <mat-card class="profCard">
     <mat-card-header>
-      <mat-card-title>Привет {{nickName}}</mat-card-title>
+      <mat-card-title class="title">Привет {{nickName}}!</mat-card-title>
       <!-- <mat-card-subtitle>---</mat-card-subtitle> -->
     </mat-card-header>
     <form (ngSubmit)="saveProphile()" [formGroup]="profileUpdateForm">
       <mat-card-content>
-        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-          <mat-form-field appearance="outline">
+        <div >
+          <mat-form-field class="input" appearance="outline">
             <mat-label>Email</mat-label>
             <input type='email' formControlName="email"
-                   matInput>
+                   matInput >
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field class="input" appearance="outline">
             <mat-label>Nickname</mat-label>
             <input type='text' formControlName="nickName"
-                   matInput>
+                   matInput >
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field class="input" appearance="outline">
             <mat-label>Имя</mat-label>
             <input type='text' formControlName="name"
-                   matInput>
+                   matInput >
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field class="input" appearance="outline">
             <mat-label>Фамилия</mat-label>
             <input type='text' formControlName="surname"
-                   matInput>
+                   matInput >
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field class="input" appearance="outline">
             <mat-label>Хват</mat-label>
             <mat-select name="Stick" [(value)]="stickSelected" formControlName="stick">
               <mat-option *ngFor="let stick of sticks" [value]="stick.value">
@@ -49,25 +48,20 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field class="input" appearance="outline">
             <mat-label>Позиция</mat-label>
             <mat-select name="gameRole" [(value)]="roleSelected" formControlName="role">
-              <mat-option *ngFor="let GameRole of roles" [value]="GameRole.value">
+              <mat-option  *ngFor="let GameRole of roles" [value]="GameRole.value">
                 {{GameRole.viewValue}}
               </mat-option>
             </mat-select>
           </mat-form-field>
-          <div fxLayout="row"
-               fxLayoutAlign="space-evenly center"
-               fxLayoutGap="10px">
-            <button mat-raised-button color="primary">Сохранить</button>
+          <div class="ButtonHolder">
+            <button class="Button" mat-raised-button color="primary">Сохранить</button>
           </div>
         </div>
       </mat-card-content>
     </form>
-    <!-- <mat-card-actions>
-      <button mat-button>Ok</button>
-    </mat-card-actions> -->
-
   </mat-card>
+  </div>
 </div>

@@ -1,11 +1,96 @@
-.reg-main{
+.headerReg {
+  background: #2F2F2F;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 22px;
+  .star {
+    color: #dc8ea4;
+    font-size: 28px;
+  }
+}
 
-    margin-top: 10%;
-    
-    }
-    
-    mat-card{
-    
-    min-width: 40%;
-    
-    }
+.regCard {
+  width: 85%;
+  background: #2F2F2F;
+  display: block;
+  padding-top: 28px;
+  box-shadow: none !important;
+  padding-left: 0;
+  justify-content: center
+
+}
+
+.mainDiv {
+  height: auto;
+  background: #2F2F2F;
+  position: relative;
+}
+
+.tabs {
+  justify-content: space-around;
+  width: 85%;
+  background: #2F2F2F;
+  display: block;
+  margin: 20px auto;
+.tab {
+  width: 49%;
+      margin: 0;
+      border: #dc8ea4 1px solid;
+      border-radius: 4px;
+      font-weight: 200;
+      font-size: 16px;
+}
+
+.input {
+  width: 117%;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+}
+
+::ng-deep .mat-tab-labels {
+  display: flex;
+  justify-content: space-around;
+}
+
+::ng-deep .mat-tab-label {
+  padding: 2px !important; // adjust this to whatever padding you need
+  justify-content: left !important;
+  font-size: 24px;
+  font-weight: 100;
+  width: 47%;
+  padding-bottom: 1rem;
+}
+
+.ButtonHolder {
+  justify-content: space-around;
+
+  .Button {
+    width: 117%;
+    height: 40px;
+    margin: 0;
+    background: #dc8ea4;
+    border-radius: 4px;
+    font-weight: 200;
+    font-size: 16px;
+  }
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #B2B5BF;
+  border: 1px;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #F1DBA9 !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #F1DBA9 !important;
+}
+::ng-deep .mat-input-element {
+  caret-color: #F1DBA9 !important;
+}
