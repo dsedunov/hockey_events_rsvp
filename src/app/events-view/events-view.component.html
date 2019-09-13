@@ -91,7 +91,10 @@
 'firstElementBlack':player.color==='black'}"
 >
 
-<p  matLine> {{player.name}} {{player.surname}}</p>
+<p matLine> <button *ngIf="user && user.admin" class="icons" mat-icon-button>
+  <mat-icon>settings</mat-icon>
+</button>
+   {{player.name}} {{player.surname}}</p>
 
 <mat-select [(value)]="player.color"
             *ngIf="player.role!=='Вратарь' && user && user.admin"
@@ -132,7 +135,10 @@
 <button *ngIf="user && user.admin && player.number == 'any'" class="icons" mat-icon-button (click)="updateRoster()">
     <mat-icon>save</mat-icon>
   </button>
-<p  matLine> {{player.name}} {{player.surname}}</p>
+<p  matLine><button *ngIf="user && user.admin" class="icons" mat-icon-button>
+    <mat-icon>settings</mat-icon>
+  </button>
+   {{player.name}} {{player.surname}}</p>
 
 <mat-select [(value)]="player.color"
           *ngIf="player.role!=='Вратарь' && user && user.admin"
@@ -165,7 +171,11 @@
 
   <mat-list>
     <mat-list-item *ngFor="let player of changedEvent.players.reject">
-      <p matLine> {{player.name}}. {{player.surname}} </p>
+      <p matLine>
+          <button *ngIf="user && user.admin" class="icons" mat-icon-button>
+              <mat-icon>settings</mat-icon>
+            </button>
+        {{player.name}}. {{player.surname}} </p>
 
     </mat-list-item>
   </mat-list>
@@ -176,7 +186,11 @@
 <mat-tab *ngIf="user && user.admin" label="Не знают ({{this.noVotedUsers.length }})">
   <mat-list>
     <mat-list-item *ngFor="let player of noVotedUsers">
-      <p matLine> {{player.name}}. {{player.surname}} </p>
+      <p matLine>
+          <button *ngIf="user && user.admin" class="icons" mat-icon-button>
+              <mat-icon>settings</mat-icon>
+            </button>
+        {{player.name}}. {{player.surname}} </p>
 
     </mat-list-item>
   </mat-list>
