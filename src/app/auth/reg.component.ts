@@ -5,6 +5,16 @@ import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 
+export interface Stick {
+  value: string;
+  viewValue: string;
+}
+
+export interface GameRole {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-reg',
   templateUrl: './reg.component.html',
@@ -12,6 +22,20 @@ import { Router } from '@angular/router';
 })
 export class RegComponent implements OnInit {
   private user: any;
+
+  stickSelected = '';
+  roleSelected = '';
+
+  sticks: Stick[] = [
+    { value: 'Левый', viewValue: 'Левый' },
+    { value: 'Правый', viewValue: 'Правый' }
+  ];
+
+  roles: GameRole[] = [
+    { value: 'Вратарь', viewValue: 'Вратарь' },
+    { value: 'Защитник', viewValue: 'Защитник' },
+    { value: 'Нападающий', viewValue: 'Нападающий' }
+  ];
 
   constructor(
     private router: Router,
@@ -34,6 +58,8 @@ export class RegComponent implements OnInit {
     nickName: [''],
     name: [''],
     surname: [''],
+    role: [''],
+    stick: ['']
   });
 
   ngOnInit() {
@@ -52,9 +78,7 @@ export class RegComponent implements OnInit {
     const userData = {
       ...this.registerForm.value,
       uid,
-      stick: null,
       active: false,
-      role: null,
     };
 
     return this.afs.collection('users').doc((this.registerForm.value.email.toLowerCase())).set(userData);

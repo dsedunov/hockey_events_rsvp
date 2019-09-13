@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -19,20 +19,47 @@ export class EventsViewComponent implements OnInit {
   usersCollection: AngularFirestoreCollection<any>;
   noVotedUsers: Array<any>;
   changedEvent: any;
+  user = null;
+  form: FormGroup;
+  marks: MarkDTO[] = [
+    new MarkDTO({id: 1, name: 'test1', number: 1}),
+    new MarkDTO({id: 2, name: 'test2', number: 2}),
+    new MarkDTO({id: 3, name: 'test3', number: 3}),
+    new MarkDTO({id: 4, name: 'test4', number: 4}),
+  ];
 
-
+  getSelectedLabel(): MarkDTO {
+    return this.form.get('label').value;
+  }
 
   constructor(
     private afs: AngularFirestore,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private eventFormBuilder: FormBuilder,
+    public eventFormBuilder: FormBuilder,
     private firebaseAuth: AngularFireAuth,
     private snackBar: MatSnackBar
-  ) {
-  }
+  ) { this.form = eventFormBuilder.group({
+    label: []
+  });
+}
 
-  ngOnInit() {
+   ngOnInit() {
+
+    const usersRef = this.afs.collection('users').doc((this.firebaseAuth.auth.currentUser.email).toLowerCase()).ref;
+    usersRef.get()
+      .then(doc => {
+        if (doc.exists) {
+          this.user = doc.data();
+          this.user.uid = this.firebaseAuth.auth.currentUser.uid;
+          const userId = this.user.uid;
+        } else {
+          console.log('No such document!');
+        }
+      })
+      .catch(err => {
+        console.log('Error getting document', err);
+      });
 
     this.activatedRoute.queryParams.subscribe((params) => {
       this.changedEvent = JSON.parse(params.param);
@@ -52,6 +79,7 @@ export class EventsViewComponent implements OnInit {
           });
         const accptedUID = this.changedEvent.players.accept && this.changedEvent.players.accept.map(player => player.uid);
         const rejectedUID = this.changedEvent.players.reject && this.changedEvent.players.reject.map(player => player.uid);
+        // const leagueUID = this.changedEvent.players.reject && this.changedEvent.players.league.map(player => player.uid);
 
         this.noVotedUsers = users
           .filter(user => {
@@ -109,4 +137,31 @@ export class EventsViewComponent implements OnInit {
       });
   }
 
+}
+
+class MarkDTO {
+  id: number;
+  name: string;
+  number: number;
+  constructor(mark?: any) {
+    this.id = mark && mark.id || null;
+    this.name = mark && mark.name || null;
+    this.number = mark && mark.number || null;
+  }
+  get color(): string {
+    let color = '';
+    switch (this.number) {
+      case 1: color = 'lightgray'; break;
+      case 2: color = 'lightblue'; break;
+      case 3: color = 'orange'; break;
+      case 4: color = 'yellow'; break;
+      case 5: color = 'green'; break;
+      case 6: color = 'purple'; break;
+      case 7: color = 'gray'; break;
+      case 8: color = 'blue'; break;
+      case 9: color = 'red'; break;
+      case 10: color = 'black'; break;
+    }
+    return color;
+  }
 }

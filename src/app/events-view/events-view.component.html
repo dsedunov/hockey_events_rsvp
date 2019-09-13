@@ -1,76 +1,73 @@
-<div>
-  <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="200px">
-    <div>
-      <button mat-icon-button color="warn" (click)="backToHome()">
-        <mat-icon>close</mat-icon>
-      </button>
-    </div>
+<div class="mainDiv">
+      <div class="headerView">
+
+          <button class="icons" mat-icon-button  (click)="backToHome()">
+            <mat-icon>keyboard_backspace</mat-icon>
+          </button>
+          <mat-icon class="star">star</mat-icon>
+
+        <button *ngIf="user && user.admin" class="icons" mat-icon-button (click)="updateRoster()">
+            <mat-icon *ngIf="user && user.admin === 'null'" class="invIcon" >save</mat-icon>
+          <mat-icon>save</mat-icon>
+        </button>
+        <mat-icon *ngIf="!user.admin" class="invIcon" >save</mat-icon>
+
+
 
   </div>
-  <mat-card fxFlexAlign.gt-xs="center">
-    <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
+  <mat-card class="viewCard">
+      <mat-card-content class="card">
+          <div class="dttm">
+            <div>
+              <p>
+                  <mat-icon class="calendar">calendar_today</mat-icon>
+                Дата
+              </p>
+            </div>
 
-      <mat-card-title>ЧТО?</mat-card-title>
-      <mat-card-subtitle>ГДЕ? КОГДА?</mat-card-subtitle>
-
-      <button mat-icon-button [matMenuTriggerFor]="menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button
-          mat-menu-item value="click to copy"
-        >
-          <mat-icon>content_copy</mat-icon>
-          <span>Копировать составы</span>
-        </button>
-        <button mat-menu-item>
-          <mat-icon>notifications</mat-icon>
-          <span>Отправить уведомление</span>
-        </button>
-        <button mat-menu-item disabled>
-          <mat-icon>delete</mat-icon>
-          <span>Удалить</span>
-        </button>
-      </mat-menu>
-      <button mat-raised-button (click)="updateRoster()">
-        Hello
-      </button>
-      <button mat-raised-button (click)="addGuetst()">
-        addGuetst
-      </button>
-    </mat-card-header>
+          </div>
+          <div class="gameType">DC Lepers : Соперник</div>
+          <ng-template class="gameType" #elseBlock>Тренировка</ng-template>
+          <div class="where">
+              <p>
+              <mat-icon class="wIcon">location_on</mat-icon>
+              Локация
+            </p>
+          </div>
+        </mat-card-content>
 
     <mat-card-content>
+      <mat-tab-group>
+        <!-- Таб для отметившихся -->
+    <mat-tab label="Придут ({{changedEvent.players.accept.length }})">
+        <p class="roleHeader">
+            ВРАТАРИ
+          </p>
+<mat-list *ngFor="let player of  this.changedEvent.players.accept | sort; index as i">
 
-    </mat-card-content>
-    <mat-card-content>
-      <p>
-        Будет / не будет
-      </p>
-    </mat-card-content>
-  </mat-card>
-
-  <mat-divider fxLayoutGap="10px" class="mDivid"></mat-divider>
-
-  <mat-list>
-    <mat-list-item *ngFor="let player of  this.changedEvent.players.accept | sort; index as i"
+    <mat-list-item *ngIf="player.role=='Вратарь'"
                    [ngClass]="{
       'firstElementAfterGoalie':player.role!=='Вратарь',
     'firstElementUndef':!player.color&&player.role!=='Вратарь',
-    'firstElementBlack':player.color==='black'}">
+    'firstElementBlack':player.color==='black'}"
+    >
 
-      <mat-icon color="primary" matListIcon>done</mat-icon>
-      <p matLine> {{player.name[0]}}. {{player.surname}} {{player.role}}</p>
+      <p  matLine> {{player.name}} {{player.surname}}</p>
+
       <mat-select [(value)]="player.color"
-                  *ngIf="player.role!=='Вратарь'"
+                  *ngIf="player.role!=='Вратарь' && user && user.admin"
                   class="color"
                   value="{{player.color}}">
-        <mat-option value="black">Черный</mat-option>
-        <mat-option value="white">Белый</mat-option>
+
+        <mat-option *ngFor="let mark of marks" [value]="mark">
+          <mat-icon [ngStyle]="{'color': mark.color}">brightness_1</mat-icon>&nbsp;{{mark.name}}</mat-option>
+        <mat-option [value]="null">
+            <mat-icon [ngStyle]="{'opacity': 0}">brightness_1</mat-icon>&nbsp;Not selected
+          </mat-option>
       </mat-select>
+
       <mat-select [(value)]="player.number"
-                  *ngIf="player.role!=='Вратарь'"
+                  *ngIf="player.role!=='Вратарь' && user && user.admin"
                   class="number"
                   [ngClass]="{'disabled-element':!player.color}"
                   disabled="{{!player.color}}"
@@ -81,24 +78,113 @@
       </mat-select>
     </mat-list-item>
   </mat-list>
-  <mat-divider fxLayoutGap="10px" class="mDivid"></mat-divider>
+
+  <p class="roleHeader">
+      ЗАЩИТНИКИ
+    </p>
+<mat-list *ngFor="let player of  this.changedEvent.players.accept | sort; index as i">
+
+<mat-list-item *ngIf="player.role=='Защитник'"
+             [ngClass]="{
+'firstElementAfterGoalie':player.role!=='Вратарь',
+'firstElementUndef':!player.color&&player.role!=='Вратарь',
+'firstElementBlack':player.color==='black'}"
+>
+
+<p  matLine> {{player.name}} {{player.surname}}</p>
+
+<mat-select [(value)]="player.color"
+            *ngIf="player.role!=='Вратарь' && user && user.admin"
+            class="color"
+            value="{{player.color}}">
+
+  <mat-option *ngFor="let mark of marks" [value]="mark">
+    <mat-icon [ngStyle]="{'color': mark.color}">brightness_1</mat-icon>&nbsp;{{mark.name}}</mat-option>
+  <mat-option [value]="null">
+      <mat-icon [ngStyle]="{'opacity': 0}">brightness_1</mat-icon>&nbsp;Not selected
+    </mat-option>
+</mat-select>
+
+<mat-select [(value)]="player.number"
+            *ngIf="player.role!=='Вратарь' && user && user.admin"
+            class="number"
+            [ngClass]="{'disabled-element':!player.color}"
+            disabled="{{!player.color}}"
+            value="player.number">
+  <mat-option class="dot" value="1">''</mat-option>
+  <mat-option value="2">''</mat-option>
+  <mat-option value="3">''</mat-option>
+</mat-select>
+</mat-list-item>
+</mat-list>
+<p class="roleHeader">
+    НАПАДАЮЩИЕ
+  </p>
+
+<mat-list *ngFor="let player of  this.changedEvent.players.accept | sort; index as i">
+
+<mat-list-item *ngIf="player.role=='Нападающий'"
+           [ngClass]="{
+'firstElementAfterGoalie':player.role!=='Вратарь',
+'firstElementUndef':!player.color&&player.role!=='Вратарь',
+'firstElementBlack':player.color==='black'}"
+>
+<button *ngIf="user && user.admin && player.number == 'any'" class="icons" mat-icon-button (click)="updateRoster()">
+    <mat-icon>save</mat-icon>
+  </button>
+<p  matLine> {{player.name}} {{player.surname}}</p>
+
+<mat-select [(value)]="player.color"
+          *ngIf="player.role!=='Вратарь' && user && user.admin"
+          class="color"
+          value="{{player.color}}">
+
+<mat-option *ngFor="let mark of marks" [value]="mark">
+  <mat-icon [ngStyle]="{'color': mark.color}">brightness_1</mat-icon>&nbsp;{{mark.name}}</mat-option>
+<mat-option [value]="null">
+    <mat-icon [ngStyle]="{'opacity': 0}">brightness_1</mat-icon>&nbsp;Not selected
+  </mat-option>
+</mat-select>
+
+<mat-select [(value)]="player.number"
+          *ngIf="player.role!=='Вратарь' && user && user.admin"
+          class="number"
+          [ngClass]="{'disabled-element':!player.color}"
+          disabled="{{!player.color}}"
+          value="player.number">
+<mat-option class="dot" value="1">1</mat-option>
+<mat-option value="2">2</mat-option>
+<mat-option value="3">3</mat-option>
+</mat-select>
+</mat-list-item>
+</mat-list>
+</mat-tab>
+
+  <!-- Таб для отклонивших -->
+  <mat-tab *ngIf="user && user.admin" label="Не придут ({{changedEvent.players.reject.length }})">
 
   <mat-list>
     <mat-list-item *ngFor="let player of changedEvent.players.reject">
-      <mat-icon color="warn" matListIcon>clear</mat-icon>
-      <p matLine> {{player.name[0]}}. {{player.surname}} {{player.role}} </p>
+      <p matLine> {{player.name}}. {{player.surname}} </p>
 
     </mat-list-item>
   </mat-list>
+</mat-tab>
 
-  <mat-divider fxLayoutGap="10px" class="mDivid"></mat-divider>
 
+<!-- Таб для не ответивших -->
+<mat-tab *ngIf="user && user.admin" label="Не знают ({{this.noVotedUsers.length }})">
   <mat-list>
     <mat-list-item *ngFor="let player of noVotedUsers">
-      <mat-icon matListIcon>priority_high</mat-icon>
-      <p matLine> {{player.name[0]}}. {{player.surname}} {{player.role}}</p>
+      <p matLine> {{player.name}}. {{player.surname}} </p>
 
     </mat-list-item>
   </mat-list>
+</mat-tab>
+</mat-tab-group>
+
+    </mat-card-content>
+
+  </mat-card>
 
 </div>

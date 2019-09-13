@@ -16,30 +16,30 @@
             {{event.gameDay}}
           </p>
         </div>
-        <button class="menu" *ngIf="user && user.admin" mat-icon-button [matMenuTriggerFor]="menu">
+        <button class="menu" mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon>more_vert</mat-icon>
         </button>
         <mat-menu id="menuButton" #menu="matMenu">
           <button mat-menu-item (click)="viewDetails(event)">
             <mat-icon>info</mat-icon>
-            <span>Информация</span>
+            <span>Подробнее</span>
           </button>
-          <button mat-menu-item (click)="copyMessage(event.players.accept)" value="click to copy">
+          <button *ngIf="user && user.admin" mat-menu-item (click)="copyMessage(event.players.accept)" value="click to copy">
             <mat-icon>content_copy</mat-icon>
             <span>Копировать составы</span>
           </button>
-          <button mat-menu-item (click)="openFileDialog(event)">
+          <button *ngIf="user && user.admin" mat-menu-item (click)="openFileDialog(event)">
             <mat-icon>library_add</mat-icon>
             <span>Добавить гостя</span>
           </button>
-          <button mat-menu-item (click)="removeEvent(event.id)">
+          <button *ngIf="user && user.admin" mat-menu-item (click)="removeEvent(event.id)">
             <mat-icon>delete</mat-icon>
             <span>Удалить</span>
           </button>
         </mat-menu>
       </div>
-      <div class="gameType" *ngIf="event.rival; else elseBlock">DC Lepers : {{event.rival}}</div>
-      <ng-template class="gameType" #elseBlock>{{event.gameType}}</ng-template>
+      <div class="gameType" *ngIf="event.rival; else notGame">DC Lepers : {{event.rival}}</div>
+      <ng-template class="gameType" #notGame>{{event.gameType}}</ng-template>
       <div class="where">
           <p>
           <mat-icon class="wIcon">location_on</mat-icon>

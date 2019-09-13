@@ -26,8 +26,8 @@ export class ProfileComponent implements OnInit {
   roleSelected = '';
 
   sticks: Stick[] = [
-    { value: 'left-0', viewValue: 'Левый' },
-    { value: 'right-1', viewValue: 'Правый' }
+    { value: 'Левый', viewValue: 'Левый' },
+    { value: 'Правый', viewValue: 'Правый' }
   ];
 
   roles: GameRole[] = [
@@ -95,10 +95,10 @@ Validators.required
           this.profileUpdateForm.setValue({
             uid,
             admin: admin || false,
-            email,
-            nickName,
-            name,
-            surname,
+            email: email || false ,
+            nickName: nickName || false,
+            name: name || false,
+            surname: surname || false,
             stick,
             role,
           });

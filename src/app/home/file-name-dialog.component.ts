@@ -13,7 +13,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
       <mat-dialog-content style="display: block;
       align-content: center;
       justify-content: space-around;
-      margin: 12px;">
+      margin: auto;">
         <mat-form-field  appearance="outline">
         <mat-label>Имя</mat-label>
           <input type='text' formControlName="name" matInput required>
@@ -77,7 +77,7 @@ export class FileNameDialogComponent implements OnInit {
       this.changedEvent = {
         ...this.changedEvent,
         gameDay: this.changedEvent.gameDayISO,
-        players: [{ name: newGuestData.name, role:newGuestData.role, status: 'accept' },
+        players: [{ name: newGuestData.name, surname: 'Гость', role:newGuestData.role, status: 'accept' },
          ...this.changedEvent.players.accept, ...this.changedEvent.players.reject]
       };
       delete this.changedEvent.gameDayISO;

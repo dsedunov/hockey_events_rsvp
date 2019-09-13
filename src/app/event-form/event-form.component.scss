@@ -1,0 +1,75 @@
+.headerCreate {
+  background: #2F2F2F;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+  .star {
+    color: #dc8ea4;
+    font-size: 28px;
+    padding: 6px;
+  }
+  .icons {
+    color: #ffffff;
+  }
+}
+
+.createCard {
+  width: 85%;
+  background: #2F2F2F;
+  display: block;
+  box-shadow: none !important;
+  margin-right: 16px;
+  margin-bottom: 16px;
+  margin-left: 16px;
+  justify-content: center;
+
+}
+.mainDiv {
+  height: auto;
+  background: #2F2F2F;
+  position: relative;
+}
+.input {
+  margin-top: 1rem;
+  width: 98%;
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.mat-radio-button ~ .mat-radio-button {
+  margin-left: 16px;
+}
+
+::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #B2B5BF;
+  border: 1px;
+}
+
+::ng-deep .mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #F1DBA9 !important;
+}
+
+::ng-deep .mat-form-field.mat-focused .mat-form-field-label {
+  color: #F1DBA9 !important;
+}
+::ng-deep .mat-input-element {
+  caret-color: #F1DBA9 !important;
+}
+
+.ButtonHolder {
+  justify-content: space-around;
+
+  .Button {
+    width: 98%;
+    height: 40px;
+    margin: 0;
+    background: #dc8ea4;
+    border-radius: 4px;
+    font-weight: 200;
+    font-size: 16px;
+  }
+}

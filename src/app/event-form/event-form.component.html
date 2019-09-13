@@ -1,21 +1,20 @@
-<div>
-  <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="200px">
+<div class="mainDiv">
+  <div class="headerCreate">
     <div>
-      <button mat-icon-button color="warn" (click)="backToHome()">
+      <button class="icons" (click)="backToHome()">
         <mat-icon>close</mat-icon>
       </button>
     </div>
 
   </div>
-  <mat-card>
-    <mat-card-header fxLayoutAlign="center center">
-      <mat-card-title >Создай меня</mat-card-title>
-      <!-- <mat-card-subtitle>---</mat-card-subtitle> -->
+  <mat-card class="createCard">
+    <mat-card-header >
+      <mat-card-title style="margin-left: -1rem;" >Создай меня</mat-card-title>
     </mat-card-header>
     <form [formGroup]="eventForm" (ngSubmit)="createEvent()">
       <mat-card-content>
-        <div fxLayout="column" fxLayoutAlign="center center" fxLayoutGap="10px">
-          <mat-form-field appearance="outline">
+        <div >
+          <mat-form-field class="input" appearance="outline">
             <mat-label>Где?</mat-label>
             <input type='text'
                    matInput
@@ -23,19 +22,19 @@
                    required
             >
           </mat-form-field>
-          <mat-form-field appearance="outline">
+          <mat-form-field class="input" appearance="outline">
             <!--  todo ограничить дату-->
             <input matInput type="datetime-local" placeholder="Когда?" formControlName="gameDay"
                    required>
           </mat-form-field>
-          <mat-label>Для кого?</mat-label>
-          <mat-radio-group fxLayoutAlign="space-evenly center" fxLayoutGap="28px" formControlName="vType" [(ngModel)]="visibility">
+          <p>Для кого?</p>
+          <mat-radio-group class="input" formControlName="vType" [(ngModel)]="visibility">
             <mat-radio-button *ngFor="let season of vTypes" [value]="season">
               {{season}}
             </mat-radio-button>
           </mat-radio-group>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field class="input" appearance="outline">
             <mat-label>Тип</mat-label>
             <mat-select formControlName="gameType" [(value)]="gameTypeSelected">
               <mat-option *ngFor="let GameType of types" [value]="GameType.value">
@@ -44,24 +43,18 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-form-field *ngIf="gameTypeSelected == 'Игра'" appearance="outline">
+          <mat-form-field class="input" *ngIf="gameTypeSelected == 'Игра'" appearance="outline">
             <mat-label>Соперник</mat-label>
             <input type='text'
             matInput
             formControlName="rival"  placeholder="Соперник">
           </mat-form-field>
 
-          <div fxLayout="row"
-               fxLayoutAlign="space-evenly center"
-               fxLayoutGap="10px">
-            <button mat-raised-button color="primary">Сохранить</button>
+          <div class="ButtonHolder">
+            <button class="Button" mat-raised-button color="primary">Сохранить</button>
           </div>
         </div>
       </mat-card-content>
     </form>
-    <!-- <mat-card-actions>
-      <button mat-button>Ok</button>
-    </mat-card-actions> -->
-
   </mat-card>
 </div>

@@ -80,6 +80,22 @@
                        formControlName="surname"
                        required>
               </mat-form-field>
+              <mat-form-field class="input" appearance="outline">
+                  <mat-label>Хват</mat-label>
+                  <mat-select name="Stick" [(value)]="stickSelected" formControlName="stick">
+                    <mat-option *ngFor="let stick of sticks" [value]="stick.value">
+                      {{stick.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
+                <mat-form-field class="input" appearance="outline">
+                  <mat-label>Позиция</mat-label>
+                  <mat-select name="gameRole" [(value)]="roleSelected" formControlName="role">
+                    <mat-option  *ngFor="let GameRole of roles" [value]="GameRole.value">
+                      {{GameRole.viewValue}}
+                    </mat-option>
+                  </mat-select>
+                </mat-form-field>
               <div class="ButtonHolder">
                 <button class="Button" mat-raised-button >Зарегистрироваться</button>
               </div>

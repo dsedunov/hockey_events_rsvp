@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
       .catch(err => {
         console.log('Error getting document', err);
       });
-    this.eventsCollection = this.afs.collection('events', ref => ref.limit(10).orderBy('gameDay', 'desc'));
+    this.eventsCollection = this.afs.collection('events', ref => ref.limit(10).orderBy('gameDay', 'asc'));
     this.eventsCollection.snapshotChanges().subscribe(eventsList => {
       const events = eventsList.map(item => {
         let whatIAmAnswer = false;
@@ -153,7 +153,7 @@ export class HomeComponent implements OnInit {
   copyMessage(playersObj: Array<any>) {
     const playersString: string = playersObj
       .reduce((startStr, player, i) => {
-        return `${ startStr }${ i ? '\n' : '' }${ player.name } ${ player.surname }`;
+        return `${ startStr }${ i ? '\n' : '' }${ player.name } ${ player.surname } ${ player.color } ${ player.number }`;
       }, '');
     const selBox = document.createElement('textarea');
     selBox.style.position = 'fixed';
