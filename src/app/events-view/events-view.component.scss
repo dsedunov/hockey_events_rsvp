@@ -31,6 +31,7 @@
   }
   .icons {
     color: #ffffff;
+    background-color: none !important;
   }
   .invIcon {
     color: transparent;
@@ -48,10 +49,7 @@
   // background: #404146;
   width: 85%;
   min-width: 325px;
-  margin-top: 16px;
-  margin-right: 16px;
-  margin-bottom: 0;
-  margin-left: 16px;
+  margin: 16px auto;
   padding-top: 0;
 
   .dttm {
