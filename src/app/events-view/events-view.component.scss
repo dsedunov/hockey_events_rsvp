@@ -1,11 +1,15 @@
 .color {
-  width: 10rem
+  width: 4rem
 }
 
 .number {
-  width: 100px
+  width: 4rem;
+  margin-left: 1rem;
 }
 
+.gameType {
+  font-size: 18px;
+  }
 
 .disabled-element {
   opacity: 0.3;
@@ -77,12 +81,24 @@
   }
 }
 
-.dot {
-  height: 25px;
-  width: 25px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
+.dotWhite {
+  width: 15px;
+  height: 15px;
+  -moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+  background-color: #ffffff !important;
+  margin-right: 1.2rem;
+}
+.dotBlack {
+  width: 15px;
+	height: 15px;
+  -moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+  background-color: #000 !important;
+  border: 1px solid white;
+  margin-right: 1.2rem;
 }
 
 ::ng-deep .mat-tab-labels {
@@ -119,3 +135,8 @@
   border-bottom: 1px #2F2F2F solid;
   border-radius: 1px;
 }
+
+
+::ng-deep .mat-select-arrow { margin-left: 1.37rem !important;}
+
+

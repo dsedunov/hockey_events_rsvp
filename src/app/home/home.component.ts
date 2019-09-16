@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
       .catch(err => {
         console.log('Error getting document', err);
       });
-    this.eventsCollection = this.afs.collection('events', ref => ref.limit(10).orderBy('gameDay', 'asc'));
+    this.eventsCollection = this.afs.collection('events', ref => ref.limit(100).orderBy('gameDay', 'asc'));
     this.eventsCollection.snapshotChanges().subscribe(eventsList => {
       const events = eventsList.map(item => {
         let whatIAmAnswer = false;

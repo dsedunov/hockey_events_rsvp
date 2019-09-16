@@ -20,25 +20,25 @@
     <form (ngSubmit)="saveProphile()" [formGroup]="profileUpdateForm">
       <mat-card-content>
         <div >
-          <mat-form-field class="input" appearance="outline">
+          <mat-form-field class="input" appearance="outline" >
             <mat-label>Email</mat-label>
-            <input type='email' formControlName="email"
-                   matInput >
+            <input type='email' formControlName="email" style="color: #c5c4c4;"
+                   matInput [readonly]="true" (click)="nowAllowed()">
           </mat-form-field>
           <mat-form-field class="input" appearance="outline">
             <mat-label>Nickname</mat-label>
-            <input type='text' formControlName="nickName"
-                   matInput >
+            <input type='text' formControlName="nickName" style="color: #c5c4c4;"
+                   matInput [readonly]="true" (click)="nowAllowed()">
           </mat-form-field>
           <mat-form-field class="input" appearance="outline">
             <mat-label>Имя</mat-label>
-            <input type='text' formControlName="name"
-                   matInput >
+            <input type='text' formControlName="name" style="color: #c5c4c4;"
+                   matInput [readonly]="true" (click)="nowAllowed()">
           </mat-form-field>
           <mat-form-field class="input" appearance="outline">
             <mat-label>Фамилия</mat-label>
-            <input type='text' formControlName="surname"
-                   matInput >
+            <input type='text' formControlName="surname" style="color: #c5c4c4;"
+                   matInput [readonly]="true" (click)="nowAllowed()">
           </mat-form-field>
           <mat-form-field class="input" appearance="outline">
             <mat-label>Хват</mat-label>

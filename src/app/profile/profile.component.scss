@@ -75,3 +75,11 @@
 ::ng-deep .mat-input-element {
   caret-color: #F1DBA9 !important;
 }
+
+::ng-deep .mat-form-field.mat-focused.mat-primary .mat-select-arrow {
+  color: #F1DBA9 !important;
+}
+
+::ng-deep .mat-primary .mat-option {
+  color: #FFFFFF !important;
+}

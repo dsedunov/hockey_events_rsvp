@@ -22,6 +22,7 @@ export interface GameRole {
 })
 export class ProfileComponent implements OnInit {
 
+
   stickSelected = '';
   roleSelected = '';
 
@@ -50,38 +51,16 @@ export class ProfileComponent implements OnInit {
 
   profileUpdateForm = this.profileUpdateFormBuilder.group({
     uid: [''],
-    email: [
-      {
-        value : '',
-        disabled: true
-      },
-Validators.required
-  ],
-    nickName: [
-      {
-        value : '',
-        disabled: true
-      },
-Validators.required
-  ],
-    name: [
-      {
-        value : '',
-        disabled: true
-      },
-Validators.required
-  ],
-    surname: [
-      {
-        value : '',
-        disabled: true
-      },
-Validators.required
-  ],
+    email: [''],
+    nickName: [''],
+    name: [''],
+    surname: [''],
     stick: [''],
     role: [''],
     admin: [''],
   });
+
+
 
   ngOnInit() {
     const usersRef = this.afs.collection('users').doc((this.firebaseAuth.auth.currentUser.email).toLowerCase()).ref;
@@ -95,10 +74,10 @@ Validators.required
           this.profileUpdateForm.setValue({
             uid,
             admin: admin || false,
-            email: email || false ,
-            nickName: nickName || false,
-            name: name || false,
-            surname: surname || false,
+            email,
+            nickName,
+            name,
+            surname,
             stick,
             role,
           });
@@ -132,6 +111,12 @@ Validators.required
   }
 
   // Метод для апдейта базы
+
+  nowAllowed() {
+    this.snackBar.open('Для изменения этих данных обратись к создателю', 'ок', {
+      duration: 10000
+    });
+  }
 
   saveProphile() {
     if (this.profileUpdateForm.status === 'VALID') {

@@ -5,6 +5,11 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
 
+export interface Color {
+  value: string;
+  viewValue: string;
+}
+
 
 @Component({
   selector: 'app-events-view',
@@ -20,17 +25,12 @@ export class EventsViewComponent implements OnInit {
   noVotedUsers: Array<any>;
   changedEvent: any;
   user = null;
-  form: FormGroup;
-  marks: MarkDTO[] = [
-    new MarkDTO({id: 1, name: 'test1', number: 1}),
-    new MarkDTO({id: 2, name: 'test2', number: 2}),
-    new MarkDTO({id: 3, name: 'test3', number: 3}),
-    new MarkDTO({id: 4, name: 'test4', number: 4}),
-  ];
+  colorSelected = '';
 
-  getSelectedLabel(): MarkDTO {
-    return this.form.get('label').value;
-  }
+  colors: Color[] = [
+    { value: 'Черный', viewValue: 'Черный' },
+    { value: 'Белый', viewValue: 'Белый' }
+  ];
 
   constructor(
     private afs: AngularFirestore,
@@ -38,11 +38,9 @@ export class EventsViewComponent implements OnInit {
     private router: Router,
     public eventFormBuilder: FormBuilder,
     private firebaseAuth: AngularFireAuth,
-    private snackBar: MatSnackBar
-  ) { this.form = eventFormBuilder.group({
-    label: []
-  });
-}
+    private snackBar: MatSnackBar,
+  ) {
+  }
 
    ngOnInit() {
 
@@ -63,28 +61,36 @@ export class EventsViewComponent implements OnInit {
 
     this.activatedRoute.queryParams.subscribe((params) => {
       this.changedEvent = JSON.parse(params.param);
+      console.log(this.changedEvent);
     });
 
     this.whiteListCollection = this.afs.collection('list');
     this.whiteListCollection.snapshotChanges().subscribe(([usersWhiteList]) => {
       const whiteListArr = Object.keys(usersWhiteList.payload.doc.data());
       this.usersCollection = this.afs.collection('users', ref => ref.limit(200));
+
       this.usersCollection.snapshotChanges().subscribe((usersRef) => {
         const users = usersRef.map(userRef => {
           return userRef.payload.doc.data();
-        });
+        });console.log(users);
         this.changedEvent.players.accept = this.changedEvent.players.accept
           .sort(({ role: roleA }, { role: roleB }) => {
             return roleA !== 'Вратарь' ? 1 : -1;
           });
         const accptedUID = this.changedEvent.players.accept && this.changedEvent.players.accept.map(player => player.uid);
         const rejectedUID = this.changedEvent.players.reject && this.changedEvent.players.reject.map(player => player.uid);
-        // const leagueUID = this.changedEvent.players.reject && this.changedEvent.players.league.map(player => player.uid);
+        // const league = this.changedEvent.players && this.user.league.map(player => player.league);
+
 
         this.noVotedUsers = users
           .filter(user => {
             return (whiteListArr.indexOf(user.uid) !== -1 && accptedUID.indexOf(user.uid) === -1 && rejectedUID.indexOf(user.uid) === -1);
           })
+
+          // .filter(user => {
+          //   return (whiteListArr.indexOf(user.league) !== -1 && league.indexOf(user.league)); })
+
+
           .sort(({ role: roleA }, { role: roleB }) => {
             return roleA !== 'Вратарь' ? 1 : -1;
           });
@@ -92,6 +98,8 @@ export class EventsViewComponent implements OnInit {
     });
 
   }
+
+
 
   backToHome() {
     this.router.navigateByUrl('/home');
@@ -137,31 +145,4 @@ export class EventsViewComponent implements OnInit {
       });
   }
 
-}
-
-class MarkDTO {
-  id: number;
-  name: string;
-  number: number;
-  constructor(mark?: any) {
-    this.id = mark && mark.id || null;
-    this.name = mark && mark.name || null;
-    this.number = mark && mark.number || null;
-  }
-  get color(): string {
-    let color = '';
-    switch (this.number) {
-      case 1: color = 'lightgray'; break;
-      case 2: color = 'lightblue'; break;
-      case 3: color = 'orange'; break;
-      case 4: color = 'yellow'; break;
-      case 5: color = 'green'; break;
-      case 6: color = 'purple'; break;
-      case 7: color = 'gray'; break;
-      case 8: color = 'blue'; break;
-      case 9: color = 'red'; break;
-      case 10: color = 'black'; break;
-    }
-    return color;
-  }
 }
