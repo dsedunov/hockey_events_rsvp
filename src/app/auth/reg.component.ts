@@ -79,6 +79,7 @@ export class RegComponent implements OnInit {
       ...this.registerForm.value,
       uid,
       active: false,
+      password: null,
     };
 
     return this.afs.collection('users').doc((this.registerForm.value.email.toLowerCase())).set(userData);

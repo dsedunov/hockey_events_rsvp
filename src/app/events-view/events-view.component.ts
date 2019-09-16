@@ -72,7 +72,7 @@ export class EventsViewComponent implements OnInit {
       this.usersCollection.snapshotChanges().subscribe((usersRef) => {
         const users = usersRef.map(userRef => {
           return userRef.payload.doc.data();
-        });console.log(users);
+        });
         this.changedEvent.players.accept = this.changedEvent.players.accept
           .sort(({ role: roleA }, { role: roleB }) => {
             return roleA !== 'Вратарь' ? 1 : -1;
