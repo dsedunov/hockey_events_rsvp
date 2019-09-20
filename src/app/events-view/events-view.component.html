@@ -66,9 +66,7 @@
              [ngClass]="{
 'firstElementAfterGoalie':player.role!=='Вратарь',
 'firstElementUndef':!player.color&&player.role!=='Вратарь',
-'firstElementBlack':player.color==='black'}"
-
->
+'firstElementBlack':player.color==='black'}">
 
 <p matLine>
    {{player.name}} {{player.surname}}</p>
@@ -112,24 +110,22 @@
    {{player.name}} {{player.surname}}</p>
 
    <mat-select [(value)]="player.color"
-   *ngIf="player.role!=='Вратарь' && user && user.admin"
+   *ngIf="player.role!=='Вратарь'"
    class="color"
    value="{{player.color}}"
-   [ngClass]="{'dotWhite':player.color === 'white', 'dotBlack':player.color === 'black'}"
-   [disabled]="user && !user.admin">
+   [ngClass]="{'dotWhite':player.color === 'white', 'dotBlack':player.color === 'black'}" [disabled]="user && !user.admin">
 <mat-option  value="black">Черный</mat-option>
 <mat-option  value="white">Белый</mat-option>
 </mat-select>
 
 <mat-select [(value)]="player.number"
-          *ngIf="player.role!=='Вратарь' && user && user.admin"
-          class="number"
-          [ngClass]="{'disabled-element':!player.color}"
-          value="player.number"
-          [disabled]="user && !user.admin">
-<mat-option value="1">1</mat-option>
-<mat-option value="2">2</mat-option>
-<mat-option value="3">3</mat-option>
+            *ngIf="player.role!=='Вратарь'"
+            class="number"
+            value="player.number"
+            [disabled]="user && !user.admin">
+            <mat-option value="1">1</mat-option>
+            <mat-option value="2">2</mat-option>
+            <mat-option value="3">3</mat-option>
 </mat-select>
 </mat-list-item>
 </mat-list>

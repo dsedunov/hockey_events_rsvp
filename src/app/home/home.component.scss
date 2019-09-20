@@ -89,7 +89,7 @@ font-size: 18px;
       width: 11px;
     }
     .menu {
-      width: 12px;
+      width: 20px;
     }
   }
 
@@ -139,6 +139,7 @@ font-size: 18px;
 
   .ButtonHolder {
     justify-content: space-around;
+    padding-top: 18px;
 
     .Button {
       width: 48%;
@@ -169,4 +170,8 @@ mat-card {
   position: fixed;
   bottom: 0;
   right: 0;
+}
+
+::ng-deep .mat-card-content {
+  margin: 0 !important;
 }
