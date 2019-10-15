@@ -4,6 +4,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireMessaging } from '@angular/fire/messaging';
 import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class MessagingService {
@@ -12,6 +13,7 @@ export class MessagingService {
 
   constructor(
     private angularFireDB: AngularFireDatabase,
+    private snackBar: MatSnackBar,
     private angularFireAuth: AngularFireAuth,
     private angularFireMessaging: AngularFireMessaging) {
     this.angularFireMessaging.messaging.subscribe(
@@ -63,6 +65,9 @@ export class MessagingService {
       (payload) => {
         console.log('new message received.', payload);
         this.currentMessage.next(payload);
+        this.snackBar.open('Сообщение пришло', 'ok', {
+          duration: 10000,
+        });
       });
   }
 }
