@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -42,14 +42,14 @@ export class EventsViewComponent implements OnInit {
   ) {
   }
 
-   ngOnInit() {
+   async ngOnInit() {
 
-    const usersRef = this.afs.collection('users').doc((this.firebaseAuth.auth.currentUser.email).toLowerCase()).ref;
+    const usersRef = this.afs.collection('users').doc(((await this.firebaseAuth.currentUser).email).toLowerCase()).ref;
     usersRef.get()
-      .then(doc => {
+      .then(async doc => {
         if (doc.exists) {
           this.user = doc.data();
-          this.user.uid = this.firebaseAuth.auth.currentUser.uid;
+          this.user.uid = (await this.firebaseAuth.currentUser).uid;
           const userId = this.user.uid;
         } else {
           console.log('No such document!');

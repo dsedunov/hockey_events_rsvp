@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { MatSnackBar } from '@angular/material';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MessagingService } from '../messaging.service';
-import { VERSION, MatDialog, MatDialogRef } from '@angular/material';
+import { VERSION } from '@angular/material/core';
+import { MatDialog } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { FileNameDialogComponent } from '../home/file-name-dialog.component';
 import { filter } from 'rxjs/operators';
 
@@ -52,12 +54,12 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     // const isGranted = this._pushNotificationService.isPermissionGranted;
     // this._pushNotificationService.requestPermission();
-    const usersRef = this.afs.collection('users').doc((this.firebaseAuth.auth.currentUser.email).toLowerCase()).ref;
+    const usersRef = this.afs.collection('users').doc(((await this.firebaseAuth.currentUser).email).toLowerCase()).ref;
     await usersRef.get()
-      .then(doc => {
+      .then(async doc => {
         if (doc.exists) {
           this.user = doc.data();
-          this.user.uid = this.firebaseAuth.auth.currentUser.uid;
+          this.user.uid = (await this.firebaseAuth.currentUser).uid;
           const userId = this.user.uid;
           this.messagingService.requestPermission(userId);
           this.messagingService.receiveMessage();

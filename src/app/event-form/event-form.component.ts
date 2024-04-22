@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -64,8 +64,8 @@ export class EventFormComponent implements OnInit {
     if (this.eventForm.status === 'VALID') {
       console.log(this.eventForm.value);
       const eventInfo = { ...this.eventForm.value };
-      eventInfo.gameDay = +new Date(eventInfo.gameDay);
-      return this.afs.collection('events').doc(this.eventForm.value.gameDay).set(eventInfo).then(() => {
+      eventInfo.gameDay = String(+new Date(eventInfo.gameDay));
+      return this.afs.collection('events').doc(this.eventForm.value.gameDay.toString()).set(eventInfo).then(() => {
         this.snackBar.open('Молодец', 'ok', {
           duration: 10000,
         });

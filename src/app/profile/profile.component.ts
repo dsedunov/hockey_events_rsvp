@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -62,18 +62,28 @@ export class ProfileComponent implements OnInit {
 
 
 
-  ngOnInit() {
-    const usersRef = this.afs.collection('users').doc((this.firebaseAuth.auth.currentUser.email).toLowerCase()).ref;
+  async ngOnInit() {
+    const usersRef = this.afs.collection('users').doc(((await this.firebaseAuth.currentUser).email).toLowerCase()).ref;
     usersRef.get()
       .then(doc => {
         console.log(doc);
         if (doc.exists) {
-          const { email, nickName, name, surname, stick, role, uid, admin } = doc.data();
+          const docData = doc.data() as {
+            email: string;
+            nickName: string;
+            name: string;
+            surname: string;
+            stick: string;
+            role: string;
+            uid: string;
+            admin: boolean;
+          };
+          const { email, nickName, name, surname, stick, role, uid, admin } = docData;
           this.email = email;
           this.nickName = nickName;
           this.profileUpdateForm.setValue({
             uid,
-            admin: admin || false,
+            admin: admin ? 'true' : 'false',
             email,
             nickName,
             name,
@@ -99,7 +109,6 @@ export class ProfileComponent implements OnInit {
 
   logout() {
     this.firebaseAuth
-      .auth
       .signOut().then(() => {
       this.openSnackBar('Давай до свидания');
       this.router.navigate(['']);

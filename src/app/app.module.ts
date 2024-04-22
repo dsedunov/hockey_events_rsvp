@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatCardModule } from '@angular/material/card';
-import { MatIconModule } from '@angular/material';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDividerModule } from '@angular/material/divider';
@@ -12,13 +12,14 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule } from '@angular/material/button';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { RegComponent } from './auth/reg.component';
-import { AngularFireModule } from '@angular/fire';
-import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from "@angular/fire/compat";
+import { AngularFireAuthModule } from "@angular/fire/compat/auth";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { environment } from '../environments/environment';
+import { environment } from 'src/environments/environment';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HomeComponent } from './home/home.component';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
 import { MatListModule } from '@angular/material/list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
@@ -30,10 +31,10 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { EventsViewComponent } from './events-view/events-view.component';
 import { ServiceWorkerModule } from '@angular/service-worker';
-import { AngularFireMessagingModule } from '@angular/fire/messaging';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { MessagingService } from './messaging.service';
-import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+//import { AngularFireAuthModule } from '@angular/fire/auth';
 // import { AsyncPipe } from '../../node_modules/@angular/common';
 import { PlayersSortPipe } from './pipes/players-sort.pipe';
 import {MatDialogModule} from '@angular/material/dialog';
@@ -58,7 +59,6 @@ import {FileNameDialogComponent} from './home/file-name-dialog.component';
     AngularFireDatabaseModule,
     // AsyncPipe,
     AngularFireAuthModule,
-    AngularFireMessagingModule,
     MatListModule,
     BrowserModule,
     MatDividerModule,
@@ -74,7 +74,7 @@ import {FileNameDialogComponent} from './home/file-name-dialog.component';
     FormsModule,
     ReactiveFormsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFirestoreModule,
+    AngularFireModule,
     MatNativeDateModule,
     MatTabsModule,
     MatMenuModule,
@@ -86,7 +86,6 @@ import {FileNameDialogComponent} from './home/file-name-dialog.component';
   ],
   providers: [AuthGuard, PlayersSortPipe, MessagingService],
   bootstrap: [AppComponent],
-  entryComponents: [FileNameDialogComponent]
 })
 export class AppModule {
 }

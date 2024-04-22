@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { AngularFireAuth } from '@angular/fire/auth';
-import { AngularFireMessaging } from '@angular/fire/messaging';
+import { AngularFireDatabase } from '@angular/fire/compat/database';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
+import { AngularFireMessaging } from '@angular/fire/compat/messaging';
 import { take } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -15,14 +15,11 @@ export class MessagingService {
     private angularFireDB: AngularFireDatabase,
     private snackBar: MatSnackBar,
     private angularFireAuth: AngularFireAuth,
-    private angularFireMessaging: AngularFireMessaging) {
-    this.angularFireMessaging.messaging.subscribe(
-      (messaging) => {
-        messaging.onMessage = messaging.onMessage.bind(messaging);
-        messaging.onTokenRefresh = messaging.onTokenRefresh.bind(messaging);
-      }
-    );
-  }
+    private angularFireMessaging: AngularFireMessaging) {}
+    listen() {
+      this.angularFireMessaging.messages
+        .subscribe((message) => { console.log(message); });
+    }
 
   /**
    * update token in firebase database

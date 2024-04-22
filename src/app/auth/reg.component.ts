@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
-import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
+import { AngularFireAuth } from '@angular/fire/compat/auth';
 import { FormControl, Validators, FormBuilder } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
@@ -88,7 +88,6 @@ export class RegComponent implements OnInit {
   register() {
     if (this.registerForm.status === 'VALID') {
       this.firebaseAuth
-        .auth
         .createUserWithEmailAndPassword((this.registerForm.value.email).toLowerCase(), this.registerForm.value.password)
         .then(value => {
           console.log(value);
@@ -110,7 +109,6 @@ export class RegComponent implements OnInit {
   login() {
     if (this.loginForm.status === 'VALID') {
       this.firebaseAuth
-        .auth
         .signInWithEmailAndPassword(this.loginForm.value.email, this.loginForm.value.password)
         .then(res => {
           const usersRef = this.afs.collection('users').doc((this.loginForm.value.email.toLowerCase())).ref;
@@ -123,7 +121,6 @@ export class RegComponent implements OnInit {
             .catch(err => {
               console.log(err);
               this.firebaseAuth
-                .auth
                 .signOut()
                 .then(response => {
                   console.log(response);
